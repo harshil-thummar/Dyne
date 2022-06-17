@@ -63,6 +63,11 @@ class ConstanceData {
   static String notificationIcon = "${bseIconUrl}notification_icon.png";
   static String messIcon = "${bseIconUrl}mess_icon.png";
   static String searchIcon = "${bseIconUrl}search_icon.png";
+  static String more3Icon = "${bseIconUrl}more_3-Lines_icon.png";
+  static String profileEditIcon = "${bseIconUrl}profile_edit_icon.png";
+  static String miniGroupIcon = "${bseIconUrl}group_icon.png";
+  static String spunIcon = "${bseIconUrl}spun_icon.png";
+  static String flatuiMoneyIcon = "${bseIconUrl}flatui_money_icon.png";
 
   ////////////////////////////////////////////
 

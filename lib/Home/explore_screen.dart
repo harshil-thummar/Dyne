@@ -81,8 +81,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
               hintText: "Search Restaurants and Cuisines",
               hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontSize: 16, color: Theme.of(context).backgroundColor),
-              fillColor: Theme.of(context).backgroundColor.withOpacity(0.6),
-              hoverColor: Theme.of(context).backgroundColor.withOpacity(0.6),
+              fillColor: Theme.of(context).backgroundColor.withOpacity(0.4),
+              hoverColor: Theme.of(context).backgroundColor.withOpacity(0.4),
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -98,8 +98,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   borderRadius: BorderRadius.circular(defaultRadius * 1.7),
                   borderSide: BorderSide(
                       color: Theme.of(context).backgroundColor, width: 0.0)),
-              prefixChild:
-                  Image.asset(ConstanceData.searchIcon, height: 20, width: 20),
+              prefixChild: Image.asset(ConstanceData.searchIcon,
+                  height: 20,
+                  width: 20,
+                  color: Theme.of(context).backgroundColor),
               suffixChild: SplashIcon(
                   onPressed: () {
                     controller.clear();

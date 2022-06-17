@@ -7,7 +7,7 @@ class ShimmerCustom extends StatefulWidget {
   final Widget child;
   final int widgetTime;
 
-  const ShimmerCustom({super.key, required this.child, this.widgetTime = 5});
+  const ShimmerCustom({super.key, required this.child, this.widgetTime = 3});
 
   @override
   State<ShimmerCustom> createState() => _ShimmerCustomState();

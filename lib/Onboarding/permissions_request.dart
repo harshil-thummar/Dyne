@@ -19,7 +19,6 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             height: double.infinity,
@@ -41,17 +40,12 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
                       size: 30,
                       icon: const Icon(Icons.arrow_back_ios_new_outlined,
                           color: Colors.white, size: 30)),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, Routes.permissionsRequest);
-                      },
-                      child: Text(
-                        "Permissions",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                            fontWeight: FontWeight.bold, color: Colors.white),
-                      )),
+                  Text(
+                    "Permissions",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
                   const SizedBox(width: defaultPadding * 2),
                 ],
               ),

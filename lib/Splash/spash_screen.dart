@@ -9,7 +9,6 @@ import '../main.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
   @override
-
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -30,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   checkUserStatus() async {
-    await Future.delayed(const Duration(milliseconds: 500 /* 3000 */));
+    await Future.delayed(const Duration(milliseconds: 2000 /* 3000 */));
     Navigator.pushReplacementNamed(context, Routes.costomeBottomBar);
   }
 
