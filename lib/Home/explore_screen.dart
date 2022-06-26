@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../Constance/constance.dart';
+import '../Language/app_localization.dart';
 import '../Widgets/shimmer.dart';
 import '../Constance/theme.dart';
 import '../Models/models.dart';
-import '../Widgets/auto_size_text.dart';
 import '../Widgets/common_button.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -60,7 +60,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     size: 30,
                     icon: Image.asset(ConstanceData.notificationIcon,
                         height: 24)),
-                Text("DYNE",
+                InfiniteText("DYNE",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                         fontWeight: FontWeight.bold, color: Colors.white)),
@@ -165,7 +165,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                             blurRadius: 5,
                                             spreadRadius: 2),
                                       ],
-                                      color: Theme.of(context).primaryColor,
                                       borderRadius: BorderRadius.circular(
                                           defaultRadius * 2.8),
                                       image: DecorationImage(
@@ -228,7 +227,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                             width:
                                                                 defaultPadding /
                                                                     2),
-                                                        Text(
+                                                        InfiniteText(
                                                           "NEW PARTNER",
                                                           style:
                                                               Theme.of(context)
@@ -406,7 +405,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                               BorderRadius.circular(
                                                                   defaultRadius /
                                                                       2)),
-                                                      child: Text(
+                                                      child: InfiniteText(
                                                           trendingRestaurantsList[index]
                                                                   .openOrClose
                                                               ? "OPEN"
@@ -438,7 +437,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                               size: 15,
                                                               color:
                                                                   Colors.black),
-                                                          Text(
+                                                          InfiniteText(
                                                             trendingRestaurantsList[
                                                                     index]
                                                                 .rating
@@ -488,7 +487,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Text(
+                                              InfiniteText(
                                                 trendingRestaurantsList[index]
                                                     .foodName,
                                                 style: Theme.of(context)
@@ -501,7 +500,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                               const SizedBox(
                                                   width: defaultPadding / 2),
                                               Flexible(
-                                                child: Text(
+                                                child: InfiniteText(
                                                   trendingRestaurantsList[index]
                                                       .foodDetails,
                                                   overflow:
@@ -571,7 +570,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: defaultPadding / 2),
-                                            child: AutoSizeText(
+                                            child: InfiniteText(
                                                 cuisinesDataList[index].name,
                                                 style: Theme.of(context)
                                                     .textTheme
@@ -644,7 +643,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
       },
       // Specify a custom transition to be used for
       // animating between opened and closed stated.
-
       transition: ExpandingFloatingSearchBarTransition(),
       actions: [
         FloatingSearchBarAction(
@@ -688,7 +686,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           top: defaultPadding / 1.5),
       child: Row(
         children: [
-          Text(title,
+          InfiniteText(title,
               style: Theme.of(context)
                   .textTheme
                   .headline5!

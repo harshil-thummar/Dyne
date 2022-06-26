@@ -46,9 +46,9 @@
 //             crossAxisAlignment: CrossAxisAlignment.center,
 //             mainAxisAlignment: MainAxisAlignment.center,
 //             children: [
-//               if (Responsive.isMobile(context)) const Text("Mobile"),
-//               if (Responsive.isTablet(context)) const Text("Tablet"),
-//               if (Responsive.isDesktop(context)) const Text("Desktop"),
+//               if (Responsive.isMobile(context)) const InfiniteText("Mobile"),
+//               if (Responsive.isTablet(context)) const InfiniteText("Tablet"),
+//               if (Responsive.isDesktop(context)) const InfiniteText("Desktop"),
 //             ],
 //           ),
 //           onPressed: () {
@@ -82,7 +82,7 @@
 //           elevation: 0,
 //           title: Row(
 //             children: [
-//               Text(
+//               InfiniteText(
 //                 "Theme Manager",
 //                 style: Theme.of(context)
 //                     .textTheme
@@ -97,7 +97,7 @@
 //                 child: Padding(
 //                   padding:
 //                       const EdgeInsets.symmetric(vertical: 1.0, horizontal: 4),
-//                   child: Text(
+//                   child: InfiniteText(
 //                     "BETA",
 //                     style: TextStyle(
 //                       fontSize: 9,
@@ -133,14 +133,14 @@
 //                 );
 //               },
 //               leading: const Icon(Icons.brightness_1_rounded),
-//               title: Text(
+//               title: InfiniteText(
 //                 "Theme Preference",
 //                 style: TextStyle(
 //                     color: Theme.of(context).accentColor,
 //                     fontWeight: FontWeight.w500,
 //                     fontFamily: "Proxima Nova"),
 //               ),
-//               subtitle: const Text(
+//               subtitle: const InfiniteText(
 //                 "text",
 //                 style: TextStyle(fontSize: 12),
 //               ),
@@ -167,7 +167,7 @@
 //                 height: MediaQuery.of(context).size.height * 0.45,
 //                 child: ClipRRect(
 //                     borderRadius: BorderRadius.circular(17),
-//                     child: const Text("data")),
+//                     child: const InfiniteText("data")),
 //               ),
 //             ),
 //             const Divider(),
@@ -175,7 +175,7 @@
 //               Container(
 //                 width: MediaQuery.of(context).size.width,
 //                 padding: const EdgeInsets.symmetric(horizontal: 16),
-//                 child: Text(
+//                 child: InfiniteText(
 //                   "Light Themes",
 //                   style: Theme.of(context).textTheme.headline4,
 //                 ),
@@ -233,7 +233,7 @@
 //                                   children: const [
 //                                     Padding(
 //                                       padding: EdgeInsets.all(4.0),
-//                                       child: Text("fvbcvb"),
+//                                       child: InfiniteText("fvbcvb"),
 //                                     ),
 //                                   ],
 //                                 ),
@@ -278,7 +278,7 @@
 //               Container(
 //                 width: MediaQuery.of(context).size.width,
 //                 padding: const EdgeInsets.symmetric(horizontal: 16),
-//                 child: Text(
+//                 child: InfiniteText(
 //                   "Dark Themes",
 //                   style: Theme.of(context).textTheme.headline4,
 //                 ),
@@ -338,7 +338,7 @@
 //                                   children: [
 //                                     Padding(
 //                                       padding: const EdgeInsets.all(4.0),
-//                                       child: Text(
+//                                       child: InfiniteText(
 //                                         "Material Dark",
 //                                         style: Theme.of(context)
 //                                             .textTheme
@@ -388,7 +388,7 @@
 //                 ? Container(
 //                     width: MediaQuery.of(context).size.width,
 //                     padding: const EdgeInsets.symmetric(horizontal: 16),
-//                     child: Text(
+//                     child: InfiniteText(
 //                       "Light Accent Color",
 //                       style: Theme.of(context).textTheme.headline4,
 //                     ),
@@ -466,7 +466,7 @@
 //               Container(
 //                 width: MediaQuery.of(context).size.width,
 //                 padding: const EdgeInsets.symmetric(horizontal: 16),
-//                 child: Text(
+//                 child: InfiniteText(
 //                   "Dark Accent Color",
 //                   style: Theme.of(context).textTheme.headline4,
 //                 ),
@@ -589,7 +589,7 @@
 //             ],
 //           ),
 //           const Spacer(),
-//           Text("Theme Preference",
+//           InfiniteText("Theme Preference",
 //               style: Theme.of(context).textTheme.headline5),
 //           const Spacer(flex: 2),
 //           Column(
@@ -624,7 +624,7 @@
 //                         borderRadius: BorderRadius.circular(20),
 //                       ),
 //                       child: Center(
-//                         child: Text(
+//                         child: InfiniteText(
 //                           "System",
 //                           style: TextStyle(
 //                               fontSize: 16,
@@ -665,7 +665,7 @@
 //                         borderRadius: BorderRadius.circular(20),
 //                       ),
 //                       child: Center(
-//                         child: Text(
+//                         child: InfiniteText(
 //                           "Light",
 //                           style: TextStyle(
 //                               fontSize: 16,
@@ -706,7 +706,7 @@
 //                         borderRadius: BorderRadius.circular(20),
 //                       ),
 //                       child: Center(
-//                         child: Text(
+//                         child: InfiniteText(
 //                           "Dark",
 //                           style: TextStyle(
 //                               fontSize: 16,
@@ -725,7 +725,7 @@
 //             padding: const EdgeInsets.fromLTRB(0, 0, 0, 32),
 //             child: SizedBox(
 //               width: MediaQuery.of(context).size.width * 0.8,
-//               child: Text(
+//               child: InfiniteText(
 //                 "Select your preferred theme mode. System mode automatically switches between light and dark depending on your device mode.",
 //                 textAlign: TextAlign.center,
 //                 style: TextStyle(

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../Language/app_localization.dart';
 import 'demo_modell.dart';
 import 'functions_country_all_picker.dart';
 import 'sim_country_code.dart';
@@ -14,10 +15,10 @@ const String _kDefaultSearchHintText = 'Search country name, code';
 class CountryAllPicker extends StatefulWidget {
   final ValueChanged<Country>? onSelected;
 
-  /// [itemTextStyle] can be used to change the TextStyle of the Text in ListItem. Default is [_defaultItemTextStyle]
+  /// [itemTextStyle] can be used to change the TextStyle of the InfiniteText in ListItem. Default is [_defaultItemTextStyle]
   final TextStyle itemTextStyle;
 
-  /// [searchInputStyle] can be used to change the TextStyle of the Text in SearchBox. Default is [searchInputStyle]
+  /// [searchInputStyle] can be used to change the TextStyle of the InfiniteText in SearchBox. Default is [searchInputStyle]
   final TextStyle searchInputStyle;
 
   /// [searchInputDecoration] can be used to change the decoration for SearchBox.
@@ -224,7 +225,8 @@ class _CountryAllPickerState extends State<CountryAllPicker> {
                                 SizedBox(width: widget.countryFlag ? 13 : 0),
                                 widget.countryName
                                     ? Expanded(
-                                        child: Text(_filteredList[index].name,
+                                        child: InfiniteText(
+                                            _filteredList[index].name,
                                             style: widget.itemTextStyle))
                                     : const SizedBox(),
                                 SizedBox(width: widget.countryName ? 7 : 0),
@@ -233,19 +235,21 @@ class _CountryAllPickerState extends State<CountryAllPicker> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   widget.countryCode
-                                      ? Text(_filteredList[index].callingCode,
+                                      ? InfiniteText(
+                                          _filteredList[index].callingCode,
                                           style: widget.itemTextStyle,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1)
                                       : const SizedBox(),
                                   SizedBox(width: widget.countryCode ? 7 : 0),
                                   widget.currencyName
-                                      ? Text(_filteredList[index].currencyName,
+                                      ? InfiniteText(
+                                          _filteredList[index].currencyName,
                                           style: widget.itemTextStyle)
                                       : const SizedBox(),
                                   SizedBox(width: widget.currencyName ? 7 : 0),
                                   widget.currencyCode
-                                      ? Text(
+                                      ? InfiniteText(
                                           _filteredList[index]
                                               .currencyCode
                                               .toUpperCase(),
@@ -255,7 +259,7 @@ class _CountryAllPickerState extends State<CountryAllPicker> {
                                       : const SizedBox(),
                                   SizedBox(width: widget.currencyCode ? 7 : 0),
                                   widget.iso3Code
-                                      ? Text(
+                                      ? InfiniteText(
                                           widget.currencyCode
                                               ? '(${_filteredList[index].iso3Code.toUpperCase()})'
                                               : _filteredList[index]

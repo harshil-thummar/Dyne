@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../../Language/app_localization.dart';
 import 'country_all_picker_.dart';
 import 'demo_modell.dart';
 import 'sim_country_code.dart';
@@ -63,15 +64,15 @@ Future<Country?> showCountryPickerSheet(BuildContext context,
                         top: 1,
                         bottom: 0,
                         child: TextButton(
-                            child: const Text('Cancel'),
+                            child: const InfiniteText('Cancel'),
                             onPressed: () => Navigator.pop(context)),
                       ),
                   Center(
                     child: title ??
-                        const Text(
+                        const InfiniteText(
                           'Choose region',
                           textAlign: TextAlign.center,
-                          style:  TextStyle(
+                          style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
                           ),
@@ -115,12 +116,12 @@ Future<Country?> showCountryPickerDialog(
                       top: 4,
                       bottom: 0,
                       child: TextButton(
-                          child: const Text('Cancel'),
+                          child: const InfiniteText('Cancel'),
                           onPressed: () => Navigator.pop(context)),
                     ),
                     Center(
                       child: title ??
-                          const Text(
+                          const InfiniteText(
                             'Choose region',
                             textAlign: TextAlign.center,
                             style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Constance/constance.dart';
+import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
 import '../Widgets/Navigator/navigator_page.dart';
 import '../Widgets/common_button.dart';
@@ -52,7 +53,7 @@ class _SingInSingUpState extends State<SingInSingUp> {
                                   MediaQuery.of(context).size.height / 18),
                           child: Image.asset(ConstanceData.dyneNewLogo,
                               height: MediaQuery.of(context).size.width / 1.6)),
-                      Text("Welcome to Dyne",
+                      InfiniteText("Welcome to Dyne",
                           style: Theme.of(context)
                               .textTheme
                               .headline5!
@@ -62,7 +63,7 @@ class _SingInSingUpState extends State<SingInSingUp> {
                           padding: EdgeInsets.only(
                               bottom: MediaQuery.of(context).size.height / 10,
                               top: MediaQuery.of(context).size.height / 40),
-                          child: const Text(
+                          child: const InfiniteText(
                               "We use your files for services and features such as:")),
                     ],
                   ),
@@ -120,7 +121,7 @@ class _SingInSingUpState extends State<SingInSingUp> {
                                       height:
                                           MediaQuery.of(context).size.height /
                                               3)),
-                              Text("Welcome to Dyne",
+                              InfiniteText("Welcome to Dyne",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline5!
@@ -141,7 +142,7 @@ class _SingInSingUpState extends State<SingInSingUp> {
                                     bottom:
                                         MediaQuery.of(context).size.height / 10,
                                   ),
-                                  child: const Text(
+                                  child: const InfiniteText(
                                       "We use your files for services and features such as:")),
                               if (Responsive.isTablet(context))
                                 Padding(
@@ -224,7 +225,7 @@ class _SingInSingUpState extends State<SingInSingUp> {
                   image,
                   height: 30,
                 )),
-            Text(
+            InfiniteText(
               text,
               style: Theme.of(context)
                   .textTheme

@@ -3,8 +3,8 @@ library flutter_switch;
 
 import 'package:flutter/material.dart';
 import '../Constance/constance.dart';
+import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
-import 'auto_size_text.dart';
 
 class CustomButton extends StatelessWidget {
   final String? text;
@@ -98,7 +98,7 @@ class CustomButton extends StatelessWidget {
                     )
                   : SizedBox(),
               text != null && text != ""
-                  ? AutoSizeText(text!,
+                  ? InfiniteText(text!,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: style != null && style != ""
@@ -389,7 +389,7 @@ class FlutterSwitch extends StatefulWidget {
 
   /// Displays an on or off text.
   ///
-  /// Text value can be override by the [activeText] and
+  /// InfiniteText value can be override by the [activeText] and
   /// [inactiveText] properties.
   ///
   /// Defaults to 'false' if no value was given.
@@ -732,7 +732,7 @@ class _FlutterSwitchState extends State<FlutterSwitch>
 
   Widget get _activeText {
     if (widget.showOnOff) {
-      return Text(
+      return InfiniteText(
         widget.activeText ?? "On",
         style: TextStyle(
           color: widget.activeTextColor,
@@ -742,12 +742,12 @@ class _FlutterSwitchState extends State<FlutterSwitch>
       );
     }
 
-    return Text("");
+    return InfiniteText("");
   }
 
   Widget get _inactiveText {
     if (widget.showOnOff) {
-      return Text(
+      return InfiniteText(
         widget.inactiveText ?? "Off",
         style: TextStyle(
           color: widget.inactiveTextColor,
@@ -758,6 +758,6 @@ class _FlutterSwitchState extends State<FlutterSwitch>
       );
     }
 
-    return Text("");
+    return InfiniteText("");
   }
 }

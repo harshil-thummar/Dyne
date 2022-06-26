@@ -1,6 +1,7 @@
 import 'package:dyne/Constance/constance.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
 import '../Widgets/Navigator/navigator_page.dart';
 import '../Widgets/common_button.dart';
@@ -40,7 +41,7 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
                       size: 30,
                       icon: const Icon(Icons.arrow_back_ios_new_outlined,
                           color: Colors.white, size: 30)),
-                  Text(
+                  InfiniteText(
                     "Permissions",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline5!.copyWith(
@@ -197,7 +198,7 @@ class _ClipperCardState extends State<ClipperCard> {
                                         context, Routes.singinsingup);
                                   },
                                 )
-                              : const Text(
+                              : const InfiniteText(
                                   "You can change these permissions at any time in your Settings app."),
                         if (Responsive.isTablet(context))
                           page == 1
@@ -209,7 +210,7 @@ class _ClipperCardState extends State<ClipperCard> {
                                         context, Routes.singinsingup);
                                   },
                                 )
-                              : const Text(
+                              : const InfiniteText(
                                   "You can change these permissions at any time in your Settings app."),
                         if (Responsive.isDesktop(context))
                           CustomButton(
@@ -238,23 +239,24 @@ class _ClipperCardState extends State<ClipperCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Before you start...",
+          InfiniteText("Before you start...",
               style: Theme.of(context)
                   .textTheme
                   .headline5!
                   .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: defaultPadding - 5),
-          Text(
+          InfiniteText(
               "We would like to inform you on why we need your data and how we use it.",
               style: Theme.of(context).textTheme.subtitle1),
           const SizedBox(height: defaultPadding * 1.5),
-          Text("Location",
+          InfiniteText("Location",
               style: Theme.of(context)
                   .textTheme
                   .headline5!
                   .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: defaultPadding - 5),
-          Text("We use your location to provide services and features such as:",
+          InfiniteText(
+              "We use your location to provide services and features such as:",
               style: Theme.of(context).textTheme.subtitle1),
           const SizedBox(height: defaultPadding * 1.5),
           permissionsDetail(
@@ -287,13 +289,14 @@ class _ClipperCardState extends State<ClipperCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Contacts",
+          InfiniteText("Contacts",
               style: Theme.of(context)
                   .textTheme
                   .headline5!
                   .copyWith(fontWeight: FontWeight.bold)),
           const SizedBox(height: defaultPadding - 5),
-          Text("We use your contacts for services and features such as:",
+          InfiniteText(
+              "We use your contacts for services and features such as:",
               style: Theme.of(context).textTheme.subtitle1),
           const SizedBox(height: defaultPadding * 2),
           permissionsDetail(
@@ -306,7 +309,7 @@ class _ClipperCardState extends State<ClipperCard> {
               text:
                   'You will receive personalized recommendations to nearby restaurants.'),
           const SizedBox(height: defaultPadding * 2),
-          Text("Files",
+          InfiniteText("Files",
               style: Theme.of(context)
                   .textTheme
                   .headline5!
@@ -342,7 +345,7 @@ class _ClipperCardState extends State<ClipperCard> {
               height: 35,
               color: Theme.of(context).primaryColor,
             )),
-        title: Text(text),
+        title: InfiniteText(text),
         contentPadding: EdgeInsets.zero,
       ),
     );

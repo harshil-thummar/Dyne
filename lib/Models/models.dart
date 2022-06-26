@@ -69,16 +69,17 @@ List<OfferListData> offerListData = <OfferListData>[
 
 class FriendListData {
   final String image;
+  final String? name;
   bool isOnline;
-  FriendListData({required this.image, this.isOnline = false});
+  FriendListData({required this.image, this.isOnline = false, this.name});
 }
 
 List<FriendListData> friendListData = <FriendListData>[
-  FriendListData(image: ConstanceData.friend_0),
-  FriendListData(image: ConstanceData.friend_1),
-  FriendListData(image: ConstanceData.friend_2),
-  FriendListData(image: ConstanceData.friend_3, isOnline: true),
-  FriendListData(image: ConstanceData.friend_4),
+  FriendListData(image: ConstanceData.friend_0, name: "Payal"),
+  FriendListData(image: ConstanceData.friend_1, name: "Priya"),
+  FriendListData(image: ConstanceData.friend_2, name: "Sonam"),
+  FriendListData(image: ConstanceData.friend_3, isOnline: true, name: "Ankit"),
+  FriendListData(image: ConstanceData.friend_4, name: "Digant"),
 ];
 
 class TrendingRestaurantsData {

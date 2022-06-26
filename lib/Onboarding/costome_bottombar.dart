@@ -13,8 +13,10 @@ import '../Home/coupons_screen.dart';
 import '../Home/explore_screen.dart';
 import '../Home/profile_screen.dart';
 import '../Home/radar_screen.dart';
+import '../Language/app_localization.dart';
 import '../Models/models.dart';
-import 'common_button.dart';
+import '../Responsive/responsive.dart';
+import '../Widgets/common_button.dart';
 
 class CustomBottomBar extends StatefulWidget {
   @override
@@ -43,6 +45,27 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         return true;
       },
       child: Scaffold(
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniCenterDocked,
+        floatingActionButton: GestureDetector(
+          onTap: () => AppTheme.isLightTheme
+              ? changeColor(context, dark)
+              : changeColor(context, light),
+          onLongPress: () => themeDialog(context),
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: Theme.of(context).iconTheme.color,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (Responsive.isMobile(context)) const InfiniteText("M"),
+                if (Responsive.isTablet(context)) const InfiniteText("T"),
+                if (Responsive.isDesktop(context)) const InfiniteText("D"),
+              ],
+            ),
+          ),
+        ),
         body: PageTransitionSwitcher(
             transitionBuilder: (
               Widget child,
@@ -109,7 +132,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                                       currentIndex == bottomBarData[index].index
                                           ? Theme.of(context).primaryColor
                                           : disabledColor),
-                          child: Text(
+                          child: InfiniteText(
                             bottomBarData[index].name,
                           ),
                         ),

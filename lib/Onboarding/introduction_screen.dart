@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Constance/constance.dart';
+import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
 import '../Widgets/Navigator/navigator_page.dart';
 import '../Widgets/common_button.dart';
@@ -124,7 +125,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                               Navigator.pushReplacementNamed(
                                   context, Routes.permissionsRequest);
                             },
-                            child: const Text("Skip"))
+                            child: const InfiniteText("Skip"))
                         : const SizedBox(),
                   ],
                 ),
@@ -173,7 +174,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         const SizedBox(height: defaultPadding * 6),
         Column(
           children: <Widget>[
-            Text(
+            InfiniteText(
               titleText,
               textAlign: TextAlign.center,
               style: Theme.of(context)
@@ -182,7 +183,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: defaultPadding),
-            Text(
+            InfiniteText(
               subText,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.subtitle1,

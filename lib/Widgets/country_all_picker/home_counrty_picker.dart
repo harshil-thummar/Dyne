@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-
+import '../../Language/app_localization.dart';
 import 'lib/country_all_picker_.dart';
 import 'lib/demo_modell.dart';
 import 'lib/functions_country_all_picker.dart';
@@ -34,7 +34,7 @@ class _HomeCounrtyPickerState extends State<HomeCounrtyPicker> {
     final country = _selectedCountry;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Country Calling Code Picker'),
+        title: const InfiniteText('Country Calling Code Picker'),
       ),
       body: Center(
         child: Column(
@@ -48,7 +48,7 @@ class _HomeCounrtyPickerState extends State<HomeCounrtyPicker> {
                         height: 16,
                       ),
                       Image.asset(country.flag),
-                      Text(
+                      InfiniteText(
                         '${country.countryCode}, ${country.callingCode} ${country.name} ${country.currencyCode}',
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 24),
@@ -59,19 +59,19 @@ class _HomeCounrtyPickerState extends State<HomeCounrtyPicker> {
             MaterialButton(
               color: Colors.amber,
               onPressed: _finalCountryPicker,
-              child: const Text('Final Country Picker'),
+              child: const InfiniteText('Final Country Picker'),
             ),
             const SizedBox(height: 24),
             MaterialButton(
               color: Colors.orange,
               onPressed: _onPressedShowBottomSheet,
-              child: const Text('Select Country using bottom sheet'),
+              child: const InfiniteText('Select Country using bottom sheet'),
             ),
             const SizedBox(height: 24),
             MaterialButton(
               color: Colors.deepOrangeAccent,
               onPressed: _onPressedShowDialog,
-              child: const Text('Select Country using dialog'),
+              child: const InfiniteText('Select Country using dialog'),
             ),
           ],
         ),
@@ -128,7 +128,7 @@ class DemoPickerPage extends StatelessWidget {
               },
               child: Icon(Icons.arrow_back,
                   color: Theme.of(context).iconTheme.color)),
-          title: const Text('Counrty/Region')),
+          title: const InfiniteText('Counrty/Region')),
       body: Column(
         children: [
           const SizedBox(height: 15),
@@ -145,8 +145,7 @@ class DemoPickerPage extends StatelessWidget {
                       hintText: "Type name here",
                       hintStyle: const TextStyle(fontSize: 16),
                       border: const OutlineInputBorder(
-                          borderRadius:
-                               BorderRadius.all(Radius.circular(15)))),
+                          borderRadius: BorderRadius.all(Radius.circular(15)))),
                   onSelected: (country) => Navigator.pop(context, country)))
         ],
       ),

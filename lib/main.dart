@@ -12,7 +12,7 @@ import 'Onboarding/launch_screen.dart';
 import 'Onboarding/permissions_request.dart';
 import 'Onboarding/singin_singup.dart';
 import 'Splash/spash_screen.dart';
-import 'Widgets/costome_bottombar.dart';
+import 'Onboarding/costome_bottombar.dart';
 
 late Box prefs;
 void main() {
@@ -57,10 +57,12 @@ class _MyAppState extends State<MyApp> {
                   AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
               statusBarBrightness:
                   AppTheme.isLightTheme ? Brightness.light : Brightness.dark,
-              systemNavigationBarColor: Colors.black,
-              systemNavigationBarDividerColor: Colors.grey,
               systemNavigationBarIconBrightness:
                   AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
+              systemNavigationBarColor:
+                  AppTheme.isLightTheme ? Colors.white : Colors.black,
+              systemNavigationBarDividerColor:
+                  AppTheme.isLightTheme ? Colors.white : Colors.black,
             )));
     return MaterialApp(
       scrollBehavior: ScrollBehavior(

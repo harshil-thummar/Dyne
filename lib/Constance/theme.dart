@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Language/app_localization.dart';
 import '../Widgets/common_button.dart';
 import '../main.dart';
 import 'constance.dart';
@@ -76,6 +77,7 @@ class AppTheme {
 
     final ThemeData base = ThemeData.light();
     return base.copyWith(
+        visualDensity: VisualDensity.comfortable,
         appBarTheme: AppBarTheme(color: Colors.white),
         popupMenuTheme: PopupMenuThemeData(color: Colors.white),
         iconTheme: IconThemeData(color: Color(0xff2b2b2b)),
@@ -170,7 +172,7 @@ void themeDialog(BuildContext context) {
         buttonPadding: EdgeInsets.all(5),
         titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 5),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text("Primary Color"),
+        title: InfiniteText("Primary Color"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -193,7 +195,7 @@ void themeDialog(BuildContext context) {
                       : SizedBox(),
                 ),
               ),
-              title: Text(
+              title: InfiniteText(
                 "Red",
                 style: Theme.of(context).textTheme.headline1,
               ),
@@ -217,7 +219,7 @@ void themeDialog(BuildContext context) {
                       : SizedBox(),
                 ),
               ),
-              title: Text(
+              title: InfiniteText(
                 "Orange",
                 style: Theme.of(context).textTheme.headline1,
               ),
@@ -241,7 +243,7 @@ void themeDialog(BuildContext context) {
                       : SizedBox(),
                 ),
               ),
-              title: Text(
+              title: InfiniteText(
                 "Yellow",
                 style: Theme.of(context).textTheme.headline1,
               ),
@@ -265,7 +267,7 @@ void themeDialog(BuildContext context) {
                       : SizedBox(),
                 ),
               ),
-              title: Text(
+              title: InfiniteText(
                 "Blue",
                 style: Theme.of(context).textTheme.headline1,
               ),
@@ -289,7 +291,7 @@ void themeDialog(BuildContext context) {
                       : SizedBox(),
                 ),
               ),
-              title: Text(
+              title: InfiniteText(
                 "Purple",
                 style: Theme.of(context).textTheme.headline1,
               ),
@@ -313,7 +315,7 @@ void themeDialog(BuildContext context) {
                       : SizedBox(),
                 ),
               ),
-              title: Text(
+              title: InfiniteText(
                 "Pink",
                 style: Theme.of(context).textTheme.headline1,
               ),

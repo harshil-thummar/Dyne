@@ -5,10 +5,9 @@ import 'dart:ui';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import '../Constance/constance.dart';
-import '../Constance/theme.dart';
+import '../Language/app_localization.dart';
 import '../Models/models.dart';
 import '../Responsive/responsive.dart';
-import '../Widgets/auto_size_text.dart';
 import '../Widgets/common_button.dart';
 import '../main.dart';
 import 'permissions_request.dart';
@@ -55,7 +54,7 @@ class _CreateAccountState extends State<CreateAccount> {
       onWillPop: () async {
         Navigator.canPop(context);
         final snackBar = SnackBar(
-          content: const Text('Yay! A SnackBar!'),
+          content: const InfiniteText('Yay! A SnackBar!'),
           action: SnackBarAction(
             label: 'Undo',
             onPressed: () {
@@ -73,22 +72,6 @@ class _CreateAccountState extends State<CreateAccount> {
         return false;
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (Responsive.isMobile(context)) const Text("Mobile"),
-              if (Responsive.isTablet(context)) const Text("Tablet"),
-              if (Responsive.isDesktop(context)) const Text("Desktop"),
-            ],
-          ),
-          onPressed: () {
-            themeDialog(context);
-            // pageController.animateToPage(1,
-            //     curve: Curves.ease, duration: defaultPageDuration);
-          },
-        ),
         body: Stack(
           children: <Widget>[
             Container(
@@ -113,7 +96,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           Navigator.pushReplacementNamed(
                               context, Routes.createAccount);
                         },
-                        child: Text("Create Account",
+                        child: InfiniteText("Create Account",
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -129,7 +112,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                     Navigator.pushReplacementNamed(
                                         context, Routes.permissionsRequest);
                                   },
-                                  child: Text("Skip",
+                                  child: InfiniteText("Skip",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline1!
@@ -335,11 +318,11 @@ class _CreateAccountState extends State<CreateAccount> {
               left: defaultPadding * 1.5,
               right: defaultPadding * 1.5),
       children: [
-        Text("Tell us a bit\nabout yourself",
+        InfiniteText("Tell us a bit\nabout yourself",
             style:
                 Theme.of(context).textTheme.headline5!.copyWith(fontSize: 28)),
         const SizedBox(height: defaultPadding - 5),
-        Text("What do you enjoy?",
+        InfiniteText("What do you enjoy?",
             style:
                 Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17)),
         const SizedBox(height: defaultPadding * 4),
@@ -443,94 +426,15 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  void successfullyDialog() => showModal(
-        configuration: const FadeScaleTransitionConfiguration(
-            transitionDuration: Duration(milliseconds: 300),
-            reverseTransitionDuration: Duration(milliseconds: 500)),
-        context: context,
-        builder: (BuildContext context) => BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
-          child: AlertDialog(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            title: Text("Account Created\nSuccessfully",
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5!
-                    .copyWith(fontWeight: FontWeight.bold)),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 5,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(ConstanceData.happyDyning,
-                          height: defaultPadding * 15),
-                      CircleAvatar(
-                          radius: defaultPadding * 4.5,
-                          backgroundColor: Theme.of(context).primaryColor),
-                      CircleAvatar(
-                          radius: defaultPadding * 4.2,
-                          backgroundColor: Theme.of(context).backgroundColor),
-                      CircleAvatar(
-                          radius: defaultPadding * 4,
-                          backgroundColor: Theme.of(context).primaryColor),
-                      Center(
-                        child: Image.asset(ConstanceData.doneIcon,
-                            width: defaultPadding * 4),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: defaultPadding * 1.5),
-                Text("Happy Dyning",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2!
-                        .copyWith(fontSize: 19, fontWeight: FontWeight.w600)),
-                const SizedBox(height: defaultPadding * 1.5),
-                SizedBox(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width / 6,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, Routes.launchScreen);
-                    },
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(defaultRadius))),
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).primaryColor)),
-                    child: AutoSizeText("Go to Home",
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline1!
-                            .copyWith(fontSize: 16, color: Colors.white)),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
   Widget addInterests(BuildContext context) {
     var pcAndTabComman = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("What are your\ninterests?",
+        InfiniteText("What are your\ninterests?",
             style:
                 Theme.of(context).textTheme.headline5!.copyWith(fontSize: 28)),
         const SizedBox(height: defaultPadding - 5),
-        Text("Choose up to five (5):",
+        InfiniteText("Choose up to five (5):",
             style:
                 Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17)),
         const SizedBox(height: defaultPadding * 4),
@@ -553,7 +457,7 @@ class _CreateAccountState extends State<CreateAccount> {
               shape: StadiumBorder(
                   side: BorderSide(color: Theme.of(context).primaryColor)),
               labelPadding: const EdgeInsets.symmetric(horizontal: 4),
-              label: Text(interestsList[index].name.toString(),
+              label: InfiniteText(interestsList[index].name.toString(),
                   style: TextStyle(
                       color: interestsList[index].isSelected
                           ? Theme.of(context).primaryColor
@@ -589,6 +493,85 @@ class _CreateAccountState extends State<CreateAccount> {
       ],
     );
   }
+
+  void successfullyDialog() => showModal(
+        configuration: const FadeScaleTransitionConfiguration(
+            transitionDuration: Duration(milliseconds: 300),
+            reverseTransitionDuration: Duration(milliseconds: 500)),
+        context: context,
+        builder: (BuildContext context) => BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
+          child: AlertDialog(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: InfiniteText("Account Created\nSuccessfully",
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5!
+                    .copyWith(fontWeight: FontWeight.bold)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 5,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(ConstanceData.happyDyning,
+                          height: defaultPadding * 15),
+                      CircleAvatar(
+                          radius: defaultPadding * 4.5,
+                          backgroundColor: Theme.of(context).primaryColor),
+                      CircleAvatar(
+                          radius: defaultPadding * 4.2,
+                          backgroundColor: Theme.of(context).backgroundColor),
+                      CircleAvatar(
+                          radius: defaultPadding * 4,
+                          backgroundColor: Theme.of(context).primaryColor),
+                      Center(
+                        child: Image.asset(ConstanceData.doneIcon,
+                            width: defaultPadding * 4),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: defaultPadding * 1.5),
+                InfiniteText("Happy Dyning",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 19, fontWeight: FontWeight.w600)),
+                const SizedBox(height: defaultPadding * 1.5),
+                SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width / 6,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.launchScreen);
+                    },
+                    style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(defaultRadius))),
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor)),
+                    child: InfiniteText("Go to Home",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline1!
+                            .copyWith(fontSize: 16, color: Colors.white)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 }
 
 class RecurrenceBottomSheet {
@@ -620,7 +603,7 @@ class RecurrenceBottomSheet {
                             Theme.of(context).backgroundColor.withOpacity(0.8)),
                     child: Column(
                       children: [
-                        Text("Account Created\nSuccessfully",
+                        InfiniteText("Account Created\nSuccessfully",
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
@@ -663,7 +646,7 @@ class RecurrenceBottomSheet {
                                     )
                                   ],
                                 ))),
-                        Text("Happy Dyning",
+                        InfiniteText("Happy Dyning",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2!
