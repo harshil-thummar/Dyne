@@ -8,9 +8,10 @@ import '../Constance/constance.dart';
 import '../Language/app_localization.dart';
 import '../Models/models.dart';
 import '../Responsive/responsive.dart';
+import '../Widgets/costome_widget/background_clipper.dart';
 import '../Widgets/common_button.dart';
+import '../Widgets/costome_widget/costome_circleavatar.dart';
 import '../main.dart';
-import 'permissions_request.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
@@ -27,6 +28,8 @@ class _CreateAccountState extends State<CreateAccount> {
 
   @override
   Widget build(BuildContext context) {
+    String profileImage = ConstanceData.profile;
+
     var typeBioField = TextFormField(
         maxLines: 6,
         textInputAction: TextInputAction.next,
@@ -57,102 +60,83 @@ class _CreateAccountState extends State<CreateAccount> {
           content: const InfiniteText('Yay! A SnackBar!'),
           action: SnackBarAction(
             label: 'Undo',
-            onPressed: () {
-              // Some code to undo the change.
-            },
+            onPressed: () {},
           ),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        // if (Navigator.canPop(context)) {
-        //   //Navigator.pop(context);
-        //   Navigator.of(context).pop();
-        // } else {
-        //   SystemNavigator.pop();
-        // }
         return false;
       },
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              color: Theme.of(context).primaryColor,
-              child: Padding(
-                padding: const EdgeInsets.all(defaultPadding).copyWith(
-                    bottom: 0,
+            //Background Color
+            BackgroundClip(
+                backgroundWidget: true,
+                padding: EdgeInsets.only(
                     top: MediaQuery.of(context).padding.top +
-                        defaultPadding * 1.5),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SplashIcon(
-                        onPressed: () {},
-                        size: 30,
-                        icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                            color: Colors.white, size: 30)),
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.createAccount);
-                        },
-                        child: InfiniteText("Create Account",
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(color: Colors.white))),
-                    SizedBox(
-                      width: defaultPadding * 3,
-                      child: Row(
-                        children: [
-                          page == 2
-                              ? GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, Routes.permissionsRequest);
-                                  },
-                                  child: InfiniteText("Skip",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline1!
-                                          .copyWith(
-                                              fontSize: 18,
-                                              color: Colors.white)))
-                              : const SizedBox(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            if (Responsive.isMobile(context) || Responsive.isTablet(context))
-              Stack(
-                alignment: Alignment.topCenter,
+                        AppBar().preferredSize.height * 1.5)),
+            Padding(
+              padding: const EdgeInsets.all(defaultPadding).copyWith(
+                  top: MediaQuery.of(context).padding.top + defaultPadding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).padding.top +
-                              defaultPadding * 6.5),
-                      child: IgnorePointer(child: AccountClipperCard())),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: PageView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: pageController,
-                      onPageChanged: (pageNumbe) {
-                        setState(() {
-                          page = pageNumbe;
-                        });
-                      },
+                    width: defaultPadding * 3,
+                    child: Row(
                       children: [
-                        addAccount(context, typeBioField),
-                        addInterests(context),
-                        addBio(context, typeBioField),
+                        SplashIcon(
+                          onPressed: () {},
+                          size: 30,
+                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
+                              color: Colors.white, size: 30),
+                        ),
                       ],
                     ),
                   ),
+                  InfiniteText("Create Account",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Colors.white)),
+                  SizedBox(
+                    width: defaultPadding * 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        page == 2
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, Routes.permissionsRequest);
+                                },
+                                child: InfiniteText("Skip",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline1!
+                                        .copyWith(
+                                            fontSize: 18, color: Colors.white)))
+                            : const SizedBox(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (Responsive.isMobile(context) || Responsive.isTablet(context))
+              PageView(
+                // physics: const NeverScrollableScrollPhysics(),
+                controller: pageController,
+                onPageChanged: (pageNumbe) {
+                  setState(() {
+                    page = pageNumbe;
+                  });
+                },
+                children: [
+                  addAccount(context, typeBioField, profileImage),
+                  addInterests(context),
+                  addBio(context, typeBioField),
                 ],
               ),
             if (Responsive.isDesktop(context))
@@ -236,29 +220,30 @@ class _CreateAccountState extends State<CreateAccount> {
                           ],
                         ),
                       )),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 11),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        CircleAvatar(
-                            radius: MediaQuery.of(context).size.height / 10,
-                            backgroundColor: Colors.white),
-                        CircleAvatar(
-                            radius: MediaQuery.of(context).size.height / 10.1,
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor),
-                        CircleAvatar(
-                            radius: MediaQuery.of(context).size.height / 10.9,
-                            backgroundColor: Colors.white),
-                        CircleAvatar(
-                            radius: MediaQuery.of(context).size.height / 11,
-                            backgroundColor: Colors.white,
-                            backgroundImage: AssetImage(ConstanceData.profile)),
-                      ],
-                    ),
-                  ),
+                  profileAvtar(context, profileImage),
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //       top: MediaQuery.of(context).size.height / 11),
+                  //   child: Stack(
+                  //     alignment: Alignment.center,
+                  //     children: [
+                  //       CircleAvatar(
+                  //           radius: MediaQuery.of(context).size.height / 10,
+                  //           backgroundColor: Colors.white),
+                  //       CircleAvatar(
+                  //           radius: MediaQuery.of(context).size.height / 10.1,
+                  //           backgroundColor:
+                  //               Theme.of(context).scaffoldBackgroundColor),
+                  //       CircleAvatar(
+                  //           radius: MediaQuery.of(context).size.height / 10.9,
+                  //           backgroundColor: Colors.white),
+                  //       CircleAvatar(
+                  //           radius: MediaQuery.of(context).size.height / 11,
+                  //           backgroundColor: Colors.white,
+                  //           backgroundImage: AssetImage(profileImage)),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
           ],
@@ -270,13 +255,12 @@ class _CreateAccountState extends State<CreateAccount> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CustomButton(
+              InfiniteElevatedButton(
                 responsive: true,
                 text: "Continue",
                 onPressed: () {
                   setState(() {
-                    if (Responsive.isMobile(context) && page < 3 ||
-                        Responsive.isTablet(context) && page < 3) {
+                    if (!Responsive.isDesktop(context) && page < 3) {
                       page++;
                     }
                   });
@@ -331,69 +315,76 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  Widget addAccount(BuildContext context, typeBioField) {
+  Widget addAccount(BuildContext context, typeBioField, profileImage) {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top + defaultPadding * 5),
+          top: MediaQuery.of(context).padding.top +
+              AppBar().preferredSize.height),
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 5,
-                    color: Theme.of(context).shadowColor.withOpacity(0.4),
-                    spreadRadius: 2,
-                    offset: const Offset(0.0, 3.0)),
-              ],
-            ),
-            child: Column(
-              children: [
-                if (Responsive.isMobile(context))
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 6,
-                          backgroundColor: Colors.white),
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 6.1,
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor),
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 6.9,
-                          backgroundColor: Colors.white),
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 7,
-                          backgroundColor: Colors.white,
-                          backgroundImage: AssetImage(ConstanceData.profile)),
-                    ],
-                  ),
-                if (Responsive.isTablet(context))
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 9,
-                          backgroundColor: Colors.white),
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 9.1,
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor),
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 9.9,
-                          backgroundColor: Colors.white),
-                      CircleAvatar(
-                          radius: MediaQuery.of(context).size.width / 10,
-                          backgroundColor: Colors.white,
-                          backgroundImage: AssetImage(ConstanceData.profile)),
-                    ],
-                  ),
-              ],
-            ),
-          ),
+          profileAvtar(context, profileImage),
+          // Container(
+          //   decoration: BoxDecoration(
+          //       color: Colors.white,
+          //       shape: BoxShape.circle,
+          //       boxShadow: AppTheme.isLightTheme
+          //           ? [
+          //               BoxShadow(
+          //                   blurRadius: 9,
+          //                   color:
+          //                       Theme.of(context).shadowColor.withOpacity(0.5),
+          //                   offset: const Offset(0.0, 8.0))
+          //             ]
+          //           : null),
+          //   child: Column(
+          //     children: [
+          //       if (Responsive.isMobile(context))
+          //         ProfileCircleAvatar(
+          //             shadow: true,
+          //             backgroundColor: Colors.white,
+          //             image: AssetImage(profileImage)),
+          //       // Stack(
+          //       //   alignment: Alignment.center,
+          //       //   children: [
+          //       //     CircleAvatar(
+          //       //         radius: MediaQuery.of(context).size.width / 6,
+          //       //         backgroundColor: Colors.white),
+          //       //     CircleAvatar(
+          //       //         radius: MediaQuery.of(context).size.width / 6.1,
+          //       //         backgroundColor:
+          //       //             Theme.of(context).scaffoldBackgroundColor),
+          //       //     CircleAvatar(
+          //       //         radius: MediaQuery.of(context).size.width / 6.9,
+          //       //         backgroundColor: Colors.white),
+          //       //     CircleAvatar(
+          //       //         radius: MediaQuery.of(context).size.width / 7,
+          //       //         backgroundColor: Colors.white,
+          //       //         backgroundImage: AssetImage(profileImage)),
+          //       //   ],
+          //       // ),
+          //       if (Responsive.isTablet(context))
+          //         Stack(
+          //           alignment: Alignment.center,
+          //           children: [
+          //             CircleAvatar(
+          //                 radius: MediaQuery.of(context).size.width / 9,
+          //                 backgroundColor: Colors.white),
+          //             CircleAvatar(
+          //                 radius: MediaQuery.of(context).size.width / 9.1,
+          //                 backgroundColor:
+          //                     Theme.of(context).scaffoldBackgroundColor),
+          //             CircleAvatar(
+          //                 radius: MediaQuery.of(context).size.width / 9.9,
+          //                 backgroundColor: Colors.white),
+          //             CircleAvatar(
+          //                 radius: MediaQuery.of(context).size.width / 10,
+          //                 backgroundColor: Colors.white,
+          //                 backgroundImage: AssetImage(profileImage)),
+          //           ],
+          //         ),
+          //     ],
+          //   ),
+          // ),
           const SizedBox(height: defaultPadding),
           if (Responsive.isMobile(context) || Responsive.isTablet(context))
             Expanded(
@@ -408,7 +399,9 @@ class _CreateAccountState extends State<CreateAccount> {
                             bottom: defaultPadding * 1.5),
                     child: Column(
                       children: [
-                        CustomField(hintText: 'First Name'),
+                        CustomField(
+                          hintText: 'First Name',
+                        ),
                         const SizedBox(height: defaultPadding),
                         CustomField(hintText: 'Last Name'),
                         const SizedBox(height: defaultPadding),
@@ -424,6 +417,16 @@ class _CreateAccountState extends State<CreateAccount> {
         ],
       ),
     );
+  }
+
+  ProfileCircleAvatar profileAvtar(BuildContext context, profileImage) {
+    return ProfileCircleAvatar(
+        shadow: true,
+        padding: Responsive.isDesktop(context)
+            ? const EdgeInsets.only(top: defaultPadding * 5)
+            : EdgeInsets.zero,
+        backgroundColor: Colors.white,
+        image: AssetImage(profileImage));
   }
 
   Widget addInterests(BuildContext context) {
@@ -500,8 +503,9 @@ class _CreateAccountState extends State<CreateAccount> {
             reverseTransitionDuration: Duration(milliseconds: 500)),
         context: context,
         builder: (BuildContext context) => BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
+          filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
           child: AlertDialog(
+            elevation: 0,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             title: InfiniteText("Account Created\nSuccessfully",
                 textAlign: TextAlign.center,
@@ -548,7 +552,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacementNamed(
-                          context, Routes.launchScreen);
+                          context, Routes.costomeBottomBar);
                     },
                     style: ButtonStyle(
                         shape:
@@ -653,7 +657,7 @@ class RecurrenceBottomSheet {
                                 .copyWith(
                                     fontSize: 19, fontWeight: FontWeight.w600)),
                         const SizedBox(height: defaultPadding * 2),
-                        CustomButton(
+                        InfiniteElevatedButton(
                           text: "Go to Home",
                           onPressed: () {
                             Navigator.pushReplacementNamed(
@@ -685,18 +689,19 @@ class _AccountClipperCardState extends State<AccountClipperCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: ClipPath(
-        clipper: BackgroundClipper(),
-        child: Container(
-            width: MediaQuery.of(context).size.width /* * 0.8 */,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                color:
-                    widget.color ?? Theme.of(context).scaffoldBackgroundColor),
-            child: widget.widget),
-      ),
-    );
+    return BackgroundClip(child: widget.widget);
+    // Align(
+    //   alignment: Alignment.bottomCenter,
+    //   child: ClipPath(
+    //     clipper: BackgroundClipper(),
+    //     child: Container(
+    //         width: MediaQuery.of(context).size.width /* * 0.8 */,
+    //         height: MediaQuery.of(context).size.height,
+    //         decoration: BoxDecoration(
+    //             color:
+    //                 widget.color ?? Theme.of(context).scaffoldBackgroundColor),
+    //         child: ),
+    //   ),
+    // );
   }
 }

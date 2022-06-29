@@ -16,17 +16,17 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    String imageLogo = ConstanceData.dyneNewLogo;
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(flex: 8),
             if (Responsive.isMobile(context))
-              Image.asset(ConstanceData.dyneNewLogo, height: screenWidth / 2),
+              Image.asset(imageLogo, height: screenWidth / 2),
             if (!Responsive.isMobile(context))
-              Image.asset(ConstanceData.dyneNewLogo, height: screenWidth / 5),
-            SizedBox(height: screenHeight / 12),
+              Image.asset(imageLogo, height: screenWidth / 5),
+            const Spacer(),
             SplashIcon(
                 onPressed: () {
                   Navigator.pushReplacementNamed(
@@ -34,6 +34,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
                 },
                 size: 55,
                 icon: const Icon(Icons.arrow_forward_ios_sharp, size: 30)),
+            const Spacer(flex: 8),
           ],
         ),
       ),

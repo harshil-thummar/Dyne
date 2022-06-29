@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   checkUserStatus() async {
     await Future.delayed(const Duration(milliseconds: 2000 /* 3000 */));
-    Navigator.pushReplacementNamed(context, Routes.costomeBottomBar);
+    Navigator.pushReplacementNamed(context, Routes.launchScreen);
   }
 
   @override

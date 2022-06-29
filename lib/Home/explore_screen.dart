@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../Constance/constance.dart';
 import '../Language/app_localization.dart';
@@ -9,6 +10,7 @@ import '../Widgets/shimmer.dart';
 import '../Constance/theme.dart';
 import '../Models/models.dart';
 import '../Widgets/common_button.dart';
+import 'home_header/notification_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -44,6 +46,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color textFormFieldColor = Colors.white;
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Column(
@@ -56,7 +59,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SplashIcon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: NotificationScreen(),
+                        ),
+                      );
+                    },
                     size: 30,
                     icon: Image.asset(ConstanceData.notificationIcon,
                         height: 24)),
@@ -79,10 +90,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
               controller: controller,
               textInputAction: TextInputAction.search,
               hintText: "Search Restaurants and Cuisines",
-              hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontSize: 16, color: Theme.of(context).backgroundColor),
-              fillColor: Theme.of(context).backgroundColor.withOpacity(0.4),
-              hoverColor: Theme.of(context).backgroundColor.withOpacity(0.4),
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(fontSize: 16, color: textFormFieldColor),
+              fillColor: textFormFieldColor.withOpacity(0.3),
+              hoverColor: textFormFieldColor.withOpacity(0.4),
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -92,16 +105,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       .copyWith(bottom: defaultPadding),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius * 1.7),
-                  borderSide: BorderSide(
-                      color: Theme.of(context).backgroundColor, width: 1.5)),
+                  borderSide:
+                      BorderSide(color: textFormFieldColor, width: 1.5)),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(defaultRadius * 1.7),
-                  borderSide: BorderSide(
-                      color: Theme.of(context).backgroundColor, width: 0.0)),
+                  borderSide:
+                      BorderSide(color: textFormFieldColor, width: 0.0)),
               prefixChild: Image.asset(ConstanceData.searchIcon,
-                  height: 20,
-                  width: 20,
-                  color: Theme.of(context).backgroundColor),
+                  height: 20, width: 20, color: textFormFieldColor),
               suffixChild: SplashIcon(
                   onPressed: () {
                     controller.clear();
@@ -112,7 +123,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   },
                   icon: CircleAvatar(
                       radius: 11,
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundColor: textFormFieldColor,
                       child: Icon(Icons.close,
                           size: 18, color: Theme.of(context).primaryColor)))),
           Expanded(
@@ -299,7 +310,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           child: friendListData.isEmpty
                               ?
                               /* Friend list Is Empty */
-                              CustomButton(
+                              InfiniteElevatedButton(
                                   horizontalMargin: defaultPadding,
                                   responsive: true,
                                   icon: Icons.person_add,

@@ -9,8 +9,9 @@ import '../Constance/data_config.dart';
 import '../Constance/theme.dart';
 import '../Language/app_localization.dart';
 import '../Models/models.dart';
-import '../Onboarding/permissions_request.dart';
+import '../Widgets/costome_widget/background_clipper.dart';
 import '../Widgets/common_button.dart';
+import '../Widgets/costome_widget/costome_circleavatar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -160,14 +161,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                         alignment: Alignment.topCenter,
                         children: <Widget>[
                           //Background Color
-                          Container(
-                              height: MediaQuery.of(context).size.height / 3,
-                              color: Theme.of(context).primaryColor),
+                          BackgroundClip(
+                              backgroundWidget: true,
+                              getClipSize: 600,
+                              containerHeight:
+                                  MediaQuery.of(context).size.height / 2,
+                              padding: EdgeInsets.only(
+                                  top: AppBar().preferredSize.height)),
                           //Icons
                           Padding(
                             padding: const EdgeInsets.all(defaultPadding),
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SplashIcon(
@@ -178,83 +182,25 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         color: Colors.white,
                                         height: 23)),
                                 SplashIcon(
-                                    onPressed: () {},
-                                    size: 31,
-                                    icon: Image.asset(ConstanceData.more3Icon,
-                                        color: Colors.white, height: 17)),
+                                  onPressed: () {},
+                                  size: 31,
+                                  icon: Image.asset(ConstanceData.more3Icon,
+                                      color: Colors.white, height: 17),
+                                ),
                               ],
                             ),
                           ),
-                          //Path Container
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  top: AppBar().preferredSize.height),
-                              child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: ClipPath(
-                                      clipper: BackgroundClipper(),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width /* * 0.8 */,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              2,
-                                          decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor))))),
                           //Data
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                margin: EdgeInsets.only(
-                                    top: MediaQuery.of(context).padding.top,
-                                    bottom: screenHeight),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    boxShadow: AppTheme.isLightTheme
-                                        ? [
-                                            BoxShadow(
-                                                blurRadius: 3,
-                                                color: Theme.of(context)
-                                                    .shadowColor
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 4,
-                                                offset: const Offset(0.0, 2.0))
-                                          ]
-                                        : null),
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                        radius:
-                                            MediaQuery.of(context).size.width /
-                                                6.2,
-                                        backgroundColor: Colors.white),
-                                    CircleAvatar(
-                                        radius:
-                                            MediaQuery.of(context).size.width /
-                                                6.3,
-                                        backgroundColor: Theme.of(context)
-                                            .scaffoldBackgroundColor),
-                                    CircleAvatar(
-                                        radius:
-                                            MediaQuery.of(context).size.width /
-                                                6.9,
-                                        backgroundColor: Colors.white),
-                                    CircleAvatar(
-                                        radius:
-                                            MediaQuery.of(context).size.width /
-                                                7,
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: const NetworkImage(
-                                            'https://www.google.com/maps/uv?pb=!1s0x3be0456a49d66ce5:0x1440baa58aadc609!3m1!7e115!4shttps://lh5.googleusercontent.com/p/AF1QipMch9mtyD12KDnHPjIDIcs2O6E7FzsxdFHEOaIw%3Dw160-h160-k-no!5sharshil+thummar+-+Google+Search!15zQ2dJZ0FRPT0&imagekey=!1e10!2sAF1QipMch9mtyD12KDnHPjIDIcs2O6E7FzsxdFHEOaIw&hl=en&sa=X&ved=2ahUKEwiR8uTN6bvvAhXoILcAHWvRBKUQoiowE3oECCEQAw')),
-                                  ],
-                                ),
-                              ),
+                              ProfileCircleAvatar(
+                                  shadow: true,
+                                  padding: EdgeInsets.only(
+                                      top: MediaQuery.of(context).padding.top,
+                                      bottom: screenHeight),
+                                  image: const NetworkImage(
+                                      'https://www.google.com/maps/uv?pb=!1s0x3be0456a49d66ce5:0x1440baa58aadc609!3m1!7e115!4shttps://lh5.googleusercontent.com/p/AF1QipMch9mtyD12KDnHPjIDIcs2O6E7FzsxdFHEOaIw%3Dw160-h160-k-no!5sharshil+thummar+-+Google+Search!15zQ2dJZ0FRPT0&imagekey=!1e10!2sAF1QipMch9mtyD12KDnHPjIDIcs2O6E7FzsxdFHEOaIw&hl=en&sa=X&ved=2ahUKEwiR8uTN6bvvAhXoILcAHWvRBKUQoiowE3oECCEQAw')),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: defaultPadding),

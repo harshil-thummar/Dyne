@@ -4,6 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
 import '../Widgets/Navigator/navigator_page.dart';
+import '../Widgets/costome_widget/background_clipper.dart';
 import '../Widgets/common_button.dart';
 import '../main.dart';
 import 'launch_screen.dart';
@@ -16,220 +17,137 @@ class PermissionsRequest extends StatefulWidget {
 }
 
 class _PermissionsRequestState extends State<PermissionsRequest> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            height: double.infinity,
-            color: Theme.of(context).primaryColor,
-            child: Padding(
-              padding: const EdgeInsets.all(defaultPadding).copyWith(
-                  bottom: 0,
-                  top: MediaQuery.of(context).padding.top +
-                      defaultPadding * 1.5),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SplashIcon(
-                      onPressed: () {
-                        Navigator.push(context,
-                            SlideRightRoute(widget: const LaunchScreen()));
-                      },
-                      size: 30,
-                      icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                          color: Colors.white, size: 30)),
-                  InfiniteText(
-                    "Permissions",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  const SizedBox(width: defaultPadding * 2),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + defaultPadding * 2),
-            child: const ClipperCard(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ClipperCard extends StatefulWidget {
-  const ClipperCard({Key? key}) : super(key: key);
-
-  @override
-  State<ClipperCard> createState() => _ClipperCardState();
-}
-
-class _ClipperCardState extends State<ClipperCard> {
   int page = 0;
   final controller = PageController();
-
   @override
   Widget build(BuildContext context) {
     var pageViewPadding = EdgeInsets.only(
         left: defaultPadding * 1.5,
         right: defaultPadding * 1.5,
-        top: MediaQuery.of(context).size.height / defaultPadding * 1.6,
+        top: AppBar().preferredSize.height * 1.4,
         bottom: MediaQuery.of(context).padding.bottom + defaultPadding);
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: ClipPath(
-            clipper: BackgroundClipper(),
-            child: Container(
-              width: MediaQuery.of(context).size.width /* * 0.8 */,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  if (Responsive.isMobile(context))
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height / 1.40),
-                        SmoothPageIndicator(
-                          controller: controller,
-                          count: 2,
-                          effect: WormEffect(
-                            spacing: 15,
-                            dotWidth: 14,
-                            dotHeight: 14,
-                            paintStyle: PaintingStyle.fill,
-                            dotColor: Theme.of(context).dividerColor,
-                            strokeWidth: 1,
-                            activeDotColor: const Color(0xff717171),
-                          ),
-                        ),
-                      ],
-                    ),
-                  if (Responsive.isTablet(context))
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height / 1.40),
-                        SmoothPageIndicator(
-                          controller: controller,
-                          count: 2,
-                          effect: WormEffect(
-                            spacing: 15,
-                            dotWidth: 14,
-                            dotHeight: 14,
-                            paintStyle: PaintingStyle.fill,
-                            dotColor: Theme.of(context).dividerColor,
-                            strokeWidth: 1,
-                            activeDotColor: const Color(0xff717171),
-                          ),
-                        ),
-                      ],
-                    ),
-                  if (Responsive.isMobile(context))
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      child: PageView(
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          BackgroundClip(
+            backgroundWidget: true,
+            padding: EdgeInsets.only(top: AppBar().preferredSize.height * 1.2),
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Indicator (Mobile & Tablet)
+                if (!Responsive.isDesktop(context))
+                  Column(
+                    children: [
+                      const Spacer(flex: 13),
+                      SmoothPageIndicator(
                         controller: controller,
-                        onPageChanged: (pageNumbe) {
-                          setState(() {
-                            page = pageNumbe;
-                          });
-                        },
-                        children: [
-                          parmissionPageOne(pageViewPadding, context),
-                          parmissionPageTow(pageViewPadding, context),
-                        ],
-                      ),
-                    ),
-                  if (Responsive.isTablet(context))
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      child: PageView(
-                        controller: controller,
-                        onPageChanged: (pageNumbe) {
-                          setState(() {
-                            page = pageNumbe;
-                          });
-                        },
-                        children: [
-                          parmissionPageOne(pageViewPadding, context),
-                          parmissionPageTow(pageViewPadding, context),
-                        ],
-                      ),
-                    ),
-                  if (Responsive.isDesktop(context))
-                    Row(
-                      children: [
-                        Expanded(
-                          child: parmissionPageOne(pageViewPadding, context),
+                        count: 2,
+                        effect: WormEffect(
+                          spacing: 15,
+                          dotWidth: 14,
+                          dotHeight: 14,
+                          paintStyle: PaintingStyle.fill,
+                          dotColor: Theme.of(context).dividerColor,
+                          strokeWidth: 1,
+                          activeDotColor: const Color(0xff717171),
                         ),
-                        Expanded(
-                          child: parmissionPageTow(pageViewPadding, context),
-                        ),
-                      ],
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.all(defaultPadding).copyWith(
-                        bottom: MediaQuery.of(context).padding.bottom +
-                            defaultPadding * 2),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        if (Responsive.isMobile(context))
-                          page == 1
-                              ? CustomButton(
-                                  responsive: true,
-                                  text: "Get Started",
-                                  onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, Routes.singinsingup);
-                                  },
-                                )
-                              : const InfiniteText(
-                                  "You can change these permissions at any time in your Settings app."),
-                        if (Responsive.isTablet(context))
-                          page == 1
-                              ? CustomButton(
-                                  responsive: true,
-                                  text: "Get Started",
-                                  onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, Routes.singinsingup);
-                                  },
-                                )
-                              : const InfiniteText(
-                                  "You can change these permissions at any time in your Settings app."),
-                        if (Responsive.isDesktop(context))
-                          CustomButton(
-                            responsive: true,
-                            text: "Get Started",
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, Routes.singinsingup);
-                            },
-                          )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                // Main Body (Mobile & Tablet)
+                if (!Responsive.isDesktop(context))
+                  PageView(
+                    controller: controller,
+                    onPageChanged: (pageNumbe) {
+                      setState(() {
+                        page = pageNumbe;
+                      });
+                    },
+                    children: [
+                      parmissionPageOne(pageViewPadding, context),
+                      parmissionPageTow(pageViewPadding, context),
+                    ],
+                  ),
+                // Main Body (Desktop Only)
+                if (Responsive.isDesktop(context))
+                  Row(
+                    children: [
+                      Expanded(
+                          child: parmissionPageOne(pageViewPadding, context)),
+                      Expanded(
+                          child: parmissionPageTow(pageViewPadding, context)),
+                    ],
+                  ),
+              ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(defaultPadding).copyWith(
+                top: MediaQuery.of(context).padding.top + defaultPadding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: defaultPadding * 3,
+                  child: Row(
+                    children: [
+                      SplashIcon(
+                          onPressed: () {
+                            Navigator.push(context,
+                                SlideRightRoute(widget: const LaunchScreen()));
+                          },
+                          size: 30,
+                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
+                              color: Colors.white, size: 30)),
+                    ],
+                  ),
+                ),
+                InfiniteText("Permissions",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(color: Colors.white)),
+                const SizedBox(width: defaultPadding * 3),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(defaultPadding).copyWith(
+            bottom: MediaQuery.of(context).padding.bottom + defaultPadding),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (!Responsive.isDesktop(context))
+              page == 1
+                  ? bottomBarButton(context)
+                  : SizedBox(
+                      height: InfiniteElevatedButton(
+                        onPressed: () {},
+                      ).height,
+                      child: const InfiniteText(
+                          "You can change these permissions at any time in your Settings app."),
+                    ),
+            if (Responsive.isDesktop(context)) bottomBarButton(context)
+          ],
         ),
-      ],
+      ),
+    );
+  }
+
+  InfiniteElevatedButton bottomBarButton(BuildContext context) {
+    return InfiniteElevatedButton(
+      responsive: true,
+      text: "Get Started",
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, Routes.singinsingup);
+      },
     );
   }
 
@@ -349,34 +267,5 @@ class _ClipperCardState extends State<ClipperCard> {
         contentPadding: EdgeInsets.zero,
       ),
     );
-  }
-}
-
-class BackgroundClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var roundnessFactor = 15.0;
-    var path = Path();
-    var height = 751.5;
-
-    path.moveTo(0, height * 0);
-    path.lineTo(0, size.height);
-    path.quadraticBezierTo(0, size.height, roundnessFactor, size.height);
-    path.lineTo(size.width - roundnessFactor, size.height);
-    path.quadraticBezierTo(size.width, size.height, size.width, size.height);
-    path.lineTo(size.width, roundnessFactor * 3);
-    path.quadraticBezierTo(size.width, roundnessFactor,
-        size.width - roundnessFactor * 2, roundnessFactor * 1.4);
-    path.lineTo(
-        roundnessFactor * 1.3, size.height * 0.10 - roundnessFactor * 0.5);
-    path.quadraticBezierTo(
-        1, size.height * 0.10, 0, size.height * 0.10 + roundnessFactor);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

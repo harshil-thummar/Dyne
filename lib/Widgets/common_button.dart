@@ -6,7 +6,7 @@ import '../Constance/constance.dart';
 import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
 
-class CustomButton extends StatelessWidget {
+class InfiniteElevatedButton extends StatelessWidget {
   final String? text;
   final Color? containerColor;
   final IconData? icon;
@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
   final double horizontalMargin;
   bool? miniRadius;
   bool? responsive;
-  CustomButton(
+  InfiniteElevatedButton(
       {Key? key,
       this.text,
       this.containerColor,
@@ -224,9 +224,9 @@ class CustomField extends StatelessWidget {
           textAlignVertical: TextAlignVertical.center,
           style: style ??
               Theme.of(context).textTheme.subtitle2!.copyWith(fontSize: 18),
-          autofocus: autofocus != null && autofocus != "" ? true : false,
-          readOnly: readOnly != null && readOnly != "" ? true : false,
-          obscureText: obscureText != null && obscureText != "" ? true : false,
+          autofocus: autofocus != null ? true : false,
+          readOnly: readOnly != null ? true : false,
+          obscureText: obscureText != null ? true : false,
           onTap: onTap,
           controller: controller,
           decoration: InputDecoration(

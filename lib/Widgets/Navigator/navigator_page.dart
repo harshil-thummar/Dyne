@@ -14,16 +14,9 @@ class ScaleRoute extends PageRouteBuilder {
             scale: Tween<double>(
               begin: 0.0,
               end: 1.0,
-            ).animate(
-              CurvedAnimation(
+            ).animate(CurvedAnimation(
                 parent: animation,
-                curve: const Interval(
-                  0.00,
-                  0.50,
-                  curve: Curves.linear,
-                ),
-              ),
-            ),
+                curve: const Interval(0.00, 0.50, curve: Curves.linear))),
             child: ScaleTransition(
               scale: Tween<double>(begin: 1.5, end: 1.0).animate(
                 CurvedAnimation(

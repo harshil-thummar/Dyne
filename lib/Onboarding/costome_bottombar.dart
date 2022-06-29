@@ -85,7 +85,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             color: Theme.of(context).scaffoldBackgroundColor,
             boxShadow: [
               BoxShadow(
-                  blurRadius: 5,
+                  blurRadius: 8,
                   spreadRadius: 2,
                   color: Theme.of(context).shadowColor)
             ],
