@@ -12,7 +12,7 @@ import 'Onboarding/launch_screen.dart';
 import 'Onboarding/permissions_request.dart';
 import 'Onboarding/singin_singup.dart';
 import 'Splash/spash_screen.dart';
-import 'Onboarding/costome_bottombar.dart';
+import 'Widgets/costome_widget/costome_bottombar.dart';
 
 late Box prefs;
 void main() {

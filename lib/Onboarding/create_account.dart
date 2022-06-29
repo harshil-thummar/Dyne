@@ -69,61 +69,12 @@ class _CreateAccountState extends State<CreateAccount> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            //Background Color
+            // Background Color
             BackgroundClip(
                 backgroundWidget: true,
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).padding.top +
                         AppBar().preferredSize.height * 1.5)),
-            Padding(
-              padding: const EdgeInsets.all(defaultPadding).copyWith(
-                  top: MediaQuery.of(context).padding.top + defaultPadding),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: defaultPadding * 3,
-                    child: Row(
-                      children: [
-                        SplashIcon(
-                          onPressed: () {},
-                          size: 30,
-                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                              color: Colors.white, size: 30),
-                        ),
-                      ],
-                    ),
-                  ),
-                  InfiniteText("Create Account",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5!
-                          .copyWith(color: Colors.white)),
-                  SizedBox(
-                    width: defaultPadding * 3,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        page == 2
-                            ? GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacementNamed(
-                                      context, Routes.permissionsRequest);
-                                },
-                                child: InfiniteText("Skip",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline1!
-                                        .copyWith(
-                                            fontSize: 18, color: Colors.white)))
-                            : const SizedBox(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
             if (Responsive.isMobile(context) || Responsive.isTablet(context))
               PageView(
                 // physics: const NeverScrollableScrollPhysics(),
@@ -221,31 +172,64 @@ class _CreateAccountState extends State<CreateAccount> {
                         ),
                       )),
                   profileAvtar(context, profileImage),
-                  // Padding(
-                  //   padding: EdgeInsets.only(
-                  //       top: MediaQuery.of(context).size.height / 11),
-                  //   child: Stack(
-                  //     alignment: Alignment.center,
-                  //     children: [
-                  //       CircleAvatar(
-                  //           radius: MediaQuery.of(context).size.height / 10,
-                  //           backgroundColor: Colors.white),
-                  //       CircleAvatar(
-                  //           radius: MediaQuery.of(context).size.height / 10.1,
-                  //           backgroundColor:
-                  //               Theme.of(context).scaffoldBackgroundColor),
-                  //       CircleAvatar(
-                  //           radius: MediaQuery.of(context).size.height / 10.9,
-                  //           backgroundColor: Colors.white),
-                  //       CircleAvatar(
-                  //           radius: MediaQuery.of(context).size.height / 11,
-                  //           backgroundColor: Colors.white,
-                  //           backgroundImage: AssetImage(profileImage)),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
+            // Header Icon
+            Padding(
+              padding: const EdgeInsets.all(defaultPadding).copyWith(
+                  top: MediaQuery.of(context).padding.top + defaultPadding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: defaultPadding * 3,
+                    child: Row(
+                      children: [
+                        SplashIcon(
+                          onPressed: () {},
+                          size: 30,
+                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
+                              color: Colors.white, size: 30),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InfiniteText("Create Account",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Colors.white)),
+                  SizedBox(
+                    width: defaultPadding * 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (page == 2)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                Responsive.isMobile(context)
+                                    ? recurrenceSheet.recurrenceSheet(context)
+                                    : successfullyDialog();
+                              });
+                            },
+                            child: InfiniteText(
+                              "Skip",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline1!
+                                  .copyWith(fontSize: 18, color: Colors.white),
+                            ),
+                          )
+                        else
+                          const SizedBox(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         bottomNavigationBar: Padding(
@@ -290,6 +274,16 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
+  ProfileCircleAvatar profileAvtar(BuildContext context, profileImage) {
+    return ProfileCircleAvatar(
+        shadow: true,
+        padding: Responsive.isDesktop(context)
+            ? const EdgeInsets.only(top: defaultPadding * 5)
+            : EdgeInsets.zero,
+        backgroundColor: Colors.white,
+        image: AssetImage(profileImage));
+  }
+
   Widget addBio(BuildContext context, TextFormField typeBioField) {
     return ListView(
       padding: Responsive.isTablet(context)
@@ -323,68 +317,6 @@ class _CreateAccountState extends State<CreateAccount> {
       child: Column(
         children: [
           profileAvtar(context, profileImage),
-          // Container(
-          //   decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       shape: BoxShape.circle,
-          //       boxShadow: AppTheme.isLightTheme
-          //           ? [
-          //               BoxShadow(
-          //                   blurRadius: 9,
-          //                   color:
-          //                       Theme.of(context).shadowColor.withOpacity(0.5),
-          //                   offset: const Offset(0.0, 8.0))
-          //             ]
-          //           : null),
-          //   child: Column(
-          //     children: [
-          //       if (Responsive.isMobile(context))
-          //         ProfileCircleAvatar(
-          //             shadow: true,
-          //             backgroundColor: Colors.white,
-          //             image: AssetImage(profileImage)),
-          //       // Stack(
-          //       //   alignment: Alignment.center,
-          //       //   children: [
-          //       //     CircleAvatar(
-          //       //         radius: MediaQuery.of(context).size.width / 6,
-          //       //         backgroundColor: Colors.white),
-          //       //     CircleAvatar(
-          //       //         radius: MediaQuery.of(context).size.width / 6.1,
-          //       //         backgroundColor:
-          //       //             Theme.of(context).scaffoldBackgroundColor),
-          //       //     CircleAvatar(
-          //       //         radius: MediaQuery.of(context).size.width / 6.9,
-          //       //         backgroundColor: Colors.white),
-          //       //     CircleAvatar(
-          //       //         radius: MediaQuery.of(context).size.width / 7,
-          //       //         backgroundColor: Colors.white,
-          //       //         backgroundImage: AssetImage(profileImage)),
-          //       //   ],
-          //       // ),
-          //       if (Responsive.isTablet(context))
-          //         Stack(
-          //           alignment: Alignment.center,
-          //           children: [
-          //             CircleAvatar(
-          //                 radius: MediaQuery.of(context).size.width / 9,
-          //                 backgroundColor: Colors.white),
-          //             CircleAvatar(
-          //                 radius: MediaQuery.of(context).size.width / 9.1,
-          //                 backgroundColor:
-          //                     Theme.of(context).scaffoldBackgroundColor),
-          //             CircleAvatar(
-          //                 radius: MediaQuery.of(context).size.width / 9.9,
-          //                 backgroundColor: Colors.white),
-          //             CircleAvatar(
-          //                 radius: MediaQuery.of(context).size.width / 10,
-          //                 backgroundColor: Colors.white,
-          //                 backgroundImage: AssetImage(profileImage)),
-          //           ],
-          //         ),
-          //     ],
-          //   ),
-          // ),
           const SizedBox(height: defaultPadding),
           if (Responsive.isMobile(context) || Responsive.isTablet(context))
             Expanded(
@@ -417,16 +349,6 @@ class _CreateAccountState extends State<CreateAccount> {
         ],
       ),
     );
-  }
-
-  ProfileCircleAvatar profileAvtar(BuildContext context, profileImage) {
-    return ProfileCircleAvatar(
-        shadow: true,
-        padding: Responsive.isDesktop(context)
-            ? const EdgeInsets.only(top: defaultPadding * 5)
-            : EdgeInsets.zero,
-        backgroundColor: Colors.white,
-        image: AssetImage(profileImage));
   }
 
   Widget addInterests(BuildContext context) {
