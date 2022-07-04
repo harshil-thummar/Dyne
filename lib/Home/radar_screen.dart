@@ -16,14 +16,12 @@ class _RadarScreenState extends State<RadarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
-      body: Column(
-        children: [
-          ProfileCircleAvatar(
-            shadow: true,
-            image: AssetImage(ConstanceData.profile),
-          )
-        ],
+      body: Center(
+        child: ProfileCircleAvatar(
+          shadow: true,
+          backgroundColor: Colors.white,
+          image: AssetImage(ConstanceData.profile),
+        ),
       ),
     );
   }

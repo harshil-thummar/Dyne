@@ -2,14 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../Language/app_localization.dart';
 import '../Widgets/common_button.dart';
 import '../main.dart';
 import 'constance.dart';
 
 class AppTheme {
-  static bool isLightTheme = false;
+  static bool isLightTheme = true;
 
   static ThemeData getTheme() {
     if (isLightTheme) {

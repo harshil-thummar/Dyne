@@ -77,9 +77,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         fontWeight: FontWeight.bold, color: Colors.white)),
                 SplashIcon(
                     onPressed: () {
-                      AppTheme.isLightTheme
-                          ? changeColor(context, dark)
-                          : changeColor(context, light);
+                      // AppTheme.isLightTheme
+                      //     ? changeColor(context, dark)
+                      //     : changeColor(context, light);
                     },
                     size: 30,
                     icon: Image.asset(ConstanceData.messIcon, height: 24)),

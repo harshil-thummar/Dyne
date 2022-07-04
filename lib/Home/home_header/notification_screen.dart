@@ -53,12 +53,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> items =
+        List<String>.generate(30, (i) => "User ${i + 1}");
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: showTopButton
           ? FloatingActionButton(
               mini: true,
-              backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
+              backgroundColor: Theme.of(context).primaryColor,
               onPressed: () {
                 scrollGoTop();
               },
@@ -75,33 +77,35 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   EdgeInsets.only(top: AppBar().preferredSize.height * 1.5),
               child: Stack(
                 children: [
-                  ListView(
-                    controller: scrollController,
-                    padding: EdgeInsets.only(
-                        top: AppBar().preferredSize.height * 1.9),
-                    children: [
-                      Slidable(
-                          actionPane: const SlidableDrawerActionPane(),
-                          actionExtentRatio: 0.25,
-                          actions: <Widget>[
-                            IconSlideAction(
-                              caption: 'Archive',
-                              color: Colors.blue,
-                              icon: Icons.archive,
-                              onTap: () => (context) => () {},
-                            ),
-                          ],
-                          secondaryActions: <Widget>[
-                            IconSlideAction(
-                              caption: 'Delete',
-                              color: Colors.red,
-                              icon: Icons.delete,
-                              onTap: () => (context) => () {},
-                            ),
-                          ],
-                          child: const ListTile(title: Text('Slide me'))),
-                    ],
-                  ),
+                  ListView.builder(
+                      controller: scrollController,
+                      itemCount: items.length,
+                      padding: EdgeInsets.only(
+                          top: AppBar().preferredSize.height * 1.9),
+                      itemBuilder: (context, int index) {
+                        return Slidable(
+                            actionPane: const SlidableDrawerActionPane(),
+                            actionExtentRatio: 0.25,
+                            actions: <Widget>[
+                              IconSlideAction(
+                                caption: 'Archive',
+                                color: Colors.blue,
+                                icon: Icons.archive,
+                                onTap: () => (context) => () {},
+                              ),
+                            ],
+                            secondaryActions: <Widget>[
+                              IconSlideAction(
+                                caption: 'Delete',
+                                color: Colors.red,
+                                icon: Icons.delete,
+                                onTap: () => (context) => () {},
+                              ),
+                            ],
+                            child: ListTile(
+                                title: Text(
+                                    "${items[index]} requested a meetup")));
+                      }),
                   Column(
                     children: [
                       Container(

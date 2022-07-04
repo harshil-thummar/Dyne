@@ -77,7 +77,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         AppBar().preferredSize.height * 1.5)),
             if (Responsive.isMobile(context) || Responsive.isTablet(context))
               PageView(
-                // physics: const NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 controller: pageController,
                 onPageChanged: (pageNumbe) {
                   setState(() {
