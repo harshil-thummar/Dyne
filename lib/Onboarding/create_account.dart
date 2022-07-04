@@ -285,27 +285,42 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   Widget addBio(BuildContext context, TextFormField typeBioField) {
-    return ListView(
+    return Padding(
       padding: Responsive.isTablet(context)
           ? EdgeInsets.only(
-              top: MediaQuery.of(context).size.width / 3.5,
+              top: MediaQuery.of(context).padding.top +
+                  AppBar().preferredSize.height * 3,
               left: MediaQuery.of(context).size.width / 4,
               right: MediaQuery.of(context).size.width / 4)
           : EdgeInsets.only(
-              top: MediaQuery.of(context).size.width / 1.6,
+              top: MediaQuery.of(context).padding.top +
+                  AppBar().preferredSize.height * 3,
               left: defaultPadding * 1.5,
               right: defaultPadding * 1.5),
-      children: [
-        InfiniteText("Tell us a bit\nabout yourself",
-            style:
-                Theme.of(context).textTheme.headline5!.copyWith(fontSize: 28)),
-        const SizedBox(height: defaultPadding - 5),
-        InfiniteText("What do you enjoy?",
-            style:
-                Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 17)),
-        const SizedBox(height: defaultPadding * 4),
-        typeBioField,
-      ],
+      child: ListView(
+        padding:
+            // Responsive.isTablet(context)?
+            EdgeInsets.only(
+                top: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).size.height)
+        // :EdgeInsets.only(top: )
+        ,
+        children: [
+          InfiniteText("Tell us a bit\nabout yourself",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(fontSize: 28)),
+          const SizedBox(height: defaultPadding - 5),
+          InfiniteText("What do you enjoy?",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2!
+                  .copyWith(fontSize: 17)),
+          const SizedBox(height: defaultPadding * 4),
+          typeBioField,
+        ],
+      ),
     );
   }
 

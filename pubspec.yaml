@@ -47,6 +47,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   material_floating_search_bar: ^0.3.7
   page_transition: ^2.0.9
+  flutter_slidable: ^0.6.0
 
 dev_dependencies:
   flutter_test:

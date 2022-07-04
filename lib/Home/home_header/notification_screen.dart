@@ -5,6 +5,7 @@ import '../../Language/app_localization.dart';
 import '../../Widgets/common_button.dart';
 import '../../Widgets/costome_widget/background_clipper.dart';
 import '../../Widgets/costome_widget/costome_circleavatar.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -79,62 +80,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     padding: EdgeInsets.only(
                         top: AppBar().preferredSize.height * 1.9),
                     children: [
-                      Container(
-                        height: 100,
-                        color: Colors.amberAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.redAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.blueAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.cyanAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.greenAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.orangeAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.pinkAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.amberAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.redAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.blueAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.cyanAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.greenAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.orangeAccent,
-                      ),
-                      Container(
-                        height: 100,
-                        color: Colors.pinkAccent,
-                      ),
+                      Slidable(
+                          actionPane: const SlidableDrawerActionPane(),
+                          actionExtentRatio: 0.25,
+                          actions: <Widget>[
+                            IconSlideAction(
+                              caption: 'Archive',
+                              color: Colors.blue,
+                              icon: Icons.archive,
+                              onTap: () => (context) => () {},
+                            ),
+                          ],
+                          secondaryActions: <Widget>[
+                            IconSlideAction(
+                              caption: 'Delete',
+                              color: Colors.red,
+                              icon: Icons.delete,
+                              onTap: () => (context) => () {},
+                            ),
+                          ],
+                          child: const ListTile(title: Text('Slide me'))),
                     ],
                   ),
                   Column(
