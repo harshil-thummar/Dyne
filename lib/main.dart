@@ -50,20 +50,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1)).then(
-        (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness:
-                  AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
-              statusBarBrightness:
-                  AppTheme.isLightTheme ? Brightness.light : Brightness.dark,
-              systemNavigationBarIconBrightness:
-                  AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
-              systemNavigationBarColor:
-                  AppTheme.isLightTheme ? Colors.white : Colors.black,
-              systemNavigationBarDividerColor:
-                  AppTheme.isLightTheme ? Colors.white : Colors.black,
-            )));
+    Future.delayed(Duration(milliseconds: 1)).then((value) =>
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness:
+                AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
+            statusBarBrightness:
+                AppTheme.isLightTheme ? Brightness.light : Brightness.dark,
+            systemNavigationBarIconBrightness:
+                AppTheme.isLightTheme ? Brightness.dark : Brightness.light,
+            systemNavigationBarColor:
+                AppTheme.isLightTheme ? Colors.white : Colors.black,
+            systemNavigationBarDividerColor:
+                AppTheme.isLightTheme ? Colors.white : Colors.black)));
     return MaterialApp(
       scrollBehavior: ScrollBehavior(
           androidOverscrollIndicator: AndroidOverscrollIndicator.stretch),

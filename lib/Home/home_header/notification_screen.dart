@@ -109,6 +109,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   Column(
                     children: [
                       Container(
+                          margin:
+                              const EdgeInsets.only(top: defaultPadding * 2),
                           height: 100,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -116,10 +118,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               end: FractionalOffset.bottomCenter,
                               colors: [
                                 Theme.of(context).scaffoldBackgroundColor,
-                                Theme.of(context).scaffoldBackgroundColor,
                                 Theme.of(context)
                                     .scaffoldBackgroundColor
-                                    .withAlpha(5),
+                                    .withOpacity(0.9),
+                                Theme.of(context)
+                                    .scaffoldBackgroundColor
+                                    .withOpacity(0.1),
                               ],
                             ),
                           ))
