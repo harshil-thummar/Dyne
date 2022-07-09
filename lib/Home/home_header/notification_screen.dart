@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../Constance/constance.dart';
 import '../../Language/app_localization.dart';
+import '../../Models/models.dart';
 import '../../Widgets/common_button.dart';
 import '../../Widgets/costome_widget/background_clipper.dart';
 import '../../Widgets/costome_widget/costome_circleavatar.dart';
@@ -53,8 +54,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items =
-        List<String>.generate(30, (i) => "User ${i + 1}");
+    // final List<String> items =
+    //     List<String>.generate(30, (i) => "User ${i + 1}");
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: showTopButton
@@ -79,39 +80,42 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 children: [
                   ListView.builder(
                       controller: scrollController,
-                      itemCount: items.length,
+                      itemCount: friendListData.length,
                       padding: EdgeInsets.only(
                           top: AppBar().preferredSize.height * 1.9),
                       itemBuilder: (context, int index) {
-                        return Slidable(
-                            actionPane: const SlidableDrawerActionPane(),
-                            actionExtentRatio: 0.25,
-                            actions: <Widget>[
-                              IconSlideAction(
-                                caption: 'Archive',
-                                color: Colors.blue,
-                                icon: Icons.archive,
-                                onTap: () => (context) => () {},
-                              ),
-                            ],
-                            secondaryActions: <Widget>[
-                              IconSlideAction(
-                                caption: 'Delete',
-                                color: Colors.red,
-                                icon: Icons.delete,
-                                onTap: () => (context) => () {},
-                              ),
-                            ],
-                            child: ListTile(
-                                title: Text(
-                                    "${items[index]} requested a meetup")));
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: defaultPadding / 2),
+                          child: Slidable(
+                              actionPane: const SlidableDrawerActionPane(),
+                              actionExtentRatio: 0.25,
+                              actions: <Widget>[
+                                IconSlideAction(
+                                  caption: 'Accept',
+                                  foregroundColor: Colors.white,
+                                  color: const Color(0xff0BBD1D),
+                                  icon: Icons.done_outline_rounded,
+                                  onTap: () => (context) => () {},
+                                ),
+                              ],
+                              secondaryActions: <Widget>[
+                                IconSlideAction(
+                                  caption: 'Decline',
+                                  color: Colors.red,
+                                  icon: Icons.close,
+                                  onTap: () => (context) => () {},
+                                ),
+                              ],
+                              child: buildListTile(/* items, */ index)),
+                        );
                       }),
                   Column(
                     children: [
                       Container(
                           margin:
                               const EdgeInsets.only(top: defaultPadding * 2),
-                          height: 100,
+                          height: 77,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topCenter,
@@ -178,6 +182,52 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildListTile(/* List<String> items, */ int index) {
+    return ListTile(
+      minVerticalPadding: defaultPadding / 1.3,
+      leading: CircleAvatar(
+          radius: 24, backgroundImage: AssetImage(friendListData[index].image)),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: TextSpan(
+              text: friendListData[index].name,
+              style:
+                  Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 15),
+              children: <TextSpan>[
+                TextSpan(
+                  text: friendListData[index].isOnline
+                      ? ' sent a friend request'
+                      : ' requested a meetup',
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1!
+                      .copyWith(fontSize: 15),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            "5 days ago",
+            style: Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(fontSize: 14, color: Colors.grey[600]),
+          ),
+        ],
+      ),
+      trailing: Padding(
+        padding: const EdgeInsets.only(left: defaultPadding * 2),
+        child: Icon(
+          Icons.food_bank_rounded,
+          size: 30,
+          color: Theme.of(context).iconTheme.color,
+        ),
       ),
     );
   }

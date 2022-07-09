@@ -1,5 +1,6 @@
 import 'package:dyne/Constance/constance.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../Language/app_localization.dart';
 import '../Responsive/responsive.dart';
@@ -15,8 +16,168 @@ class PermissionsRequest extends StatefulWidget {
   @override
   State<PermissionsRequest> createState() => _PermissionsRequestState();
 }
+// Map<Permission, PermissionStatus> status = await [
+//       Permission.location,
+//       Permission.contacts,
+//       Permission.storage
+//     ].request();
 
 class _PermissionsRequestState extends State<PermissionsRequest> {
+  ///////////////////////////
+
+  //PermissionStatus locationStatus =
+  //     await Permission.location.request();
+  // if (locationStatus == PermissionStatus.granted) {}
+  // if (locationStatus == PermissionStatus.denied) {
+  //   showToast("This permission is recommended");
+  // }
+  // if (locationStatus ==
+  //     PermissionStatus.permanentlyDenied) {
+  //   openAppSettings();
+  // }
+
+  bool locationStatus = false;
+  bool contactsStatus = false;
+  bool storageStatus = false;
+  bool detectPermission = false;
+  @override
+  void initState() {
+    checkLocationPermission();
+
+    // checkContactPermission();
+    // checkStoragePermission();
+    super.initState();
+  }
+
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && detectPermission) {
+      detectPermission = false;
+      checkLocationPermission();
+    } else if (state == AppLifecycleState.paused) {
+      detectPermission = true;
+    }
+  }
+
+  Future checkLocationPermission() async {
+    if (await Permission.location.request().isGranted) {
+      setState(() {
+        locationStatus = true;
+      });
+    } else if (await Permission.location.request().isPermanentlyDenied) {
+      await showToast("location required");
+    } else if (await Permission.location.request().isDenied) {
+      setState(() {
+        locationStatus = false;
+      });
+    }
+    if (await Permission.contacts.request().isGranted) {
+      setState(() {
+        contactsStatus = true;
+      });
+    } else if (await Permission.contacts.request().isPermanentlyDenied) {
+      await showToast("contact required");
+    } else if (await Permission.contacts.request().isDenied) {
+      setState(() {
+        contactsStatus = false;
+      });
+    }
+    if (await Permission.storage.request().isGranted) {
+      setState(() {
+        storageStatus = true;
+      });
+    } else if (await Permission.storage.request().isPermanentlyDenied) {
+      await showToast("storage required");
+    } else if (await Permission.storage.request().isDenied) {
+      setState(() {
+        storageStatus = false;
+      });
+    }
+  }
+
+  //////////////////////////////////////////////////////////
+  // Future<bool> checkPermission() async {
+  //   Map<Permission, PermissionStatus> status = await [
+  //     Permission.location,
+  //     Permission.contacts,
+  //     Permission.storage
+  //   ].request();
+
+  //   if (status == PermissionStatus.granted) {
+  //     setState(() {
+  //       locationStatus = true;
+  //     });
+  //     return true;
+  //   } else {
+  //     showToast("loc open Setting");
+  //   }
+
+  //   if (status[1] != PermissionStatus.granted) {
+  //     setState(() {
+  //       contactsStatus = true;
+  //     });
+  //     return true;
+  //   } else {
+  //     showToast("con open Setting");
+  //   }
+
+  //   if (status[2] != PermissionStatus.granted) {
+  //     setState(() {
+  //       storageStatus = true;
+  //     });
+  //     return true;
+  //   } else {
+  //     showToast("stg open Setting");
+  //   }
+  //   return false;
+  // }
+
+/* 
+     //locationResult
+  Future<bool> checkLocationPermission() async {
+    PermissionStatus locationResult;
+    locationResult = await Permission.location.request();
+    if (locationResult == PermissionStatus.granted) {
+      setState(() {
+        locationStatus = true;
+      });
+      return true;
+    } else {
+      showToast("open Setting");
+    }
+    return false;
+  }
+
+    //contactsResult
+  Future<bool> checkContactPermission() async {
+    PermissionStatus contactsResult;
+    contactsResult = await Permission.contacts.request();
+    if (contactsResult.isGranted) {
+      setState(() {
+        contactsStatus = true;
+      });
+      return true;
+    } else {
+      showToast("open Setting");
+    }
+    return false;
+  }
+
+    //storageResult
+  Future<bool> checkStoragePermission() async {
+    PermissionStatus storageResult;
+    storageResult = await Permission.storage.request();
+    if (storageResult.isGranted) {
+      setState(() {
+        storageStatus = true;
+      });
+      return true;
+    } else {
+      showToast("open Setting");
+    }
+    return false;
+  }
+ */
+  ///////////////////////////
   int page = 0;
   final controller = PageController();
   @override
@@ -31,8 +192,9 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
         children: <Widget>[
           BackgroundClip(
             backgroundWidget: true,
-            padding: EdgeInsets.only(top: AppBar().preferredSize.height * 1.2),
+            padding: EdgeInsets.only(top: AppBar().preferredSize.height * 1.3),
             color: Theme.of(context).scaffoldBackgroundColor,
+            getClipSize: 600,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -103,7 +265,7 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
                           },
                           size: 30,
                           icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                              color: Colors.white, size: 30)),
+                              color: Colors.white, size: 28)),
                     ],
                   ),
                 ),
@@ -113,7 +275,25 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
                         .textTheme
                         .headline5!
                         .copyWith(color: Colors.white)),
-                const SizedBox(width: defaultPadding * 3),
+                SizedBox(
+                    width: defaultPadding * 3,
+                    child: SplashIcon(
+                        onPressed: locationStatus == true &&
+                                contactsStatus == true &&
+                                storageStatus == true
+                            ? () {
+                                didChangeAppLifecycleState(
+                                    AppLifecycleState.resumed);
+                                checkLocationPermission();
+                                debugPrint("print");
+                              }
+                            : () {
+                                openAppSettings();
+                                didChangeAppLifecycleState(
+                                    AppLifecycleState.resumed);
+                              },
+                        icon: const Icon(Icons.settings,
+                            size: 26, color: Colors.white))),
               ],
             ),
           ),
@@ -126,20 +306,84 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            if (!Responsive.isDesktop(context))
-              page == 1
-                  ? bottomBarButton(context)
-                  : SizedBox(
-                      height: InfiniteElevatedButton(
-                        onPressed: () {},
-                      ).height,
-                      child: const InfiniteText(
-                          "You can change these permissions at any time in your Settings app."),
-                    ),
-            if (Responsive.isDesktop(context)) bottomBarButton(context)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlutterSwitch(
+                    height: 22.0,
+                    width: 33,
+                    padding: 3.0,
+                    toggleSize: 15.0,
+                    borderRadius: defaultRadius,
+                    value: locationStatus,
+                    onToggle: (_) {}),
+                FlutterSwitch(
+                    height: 22.0,
+                    width: 33,
+                    padding: 3.0,
+                    toggleSize: 15.0,
+                    borderRadius: defaultRadius,
+                    value: contactsStatus,
+                    onToggle: (_) {}),
+                FlutterSwitch(
+                    height: 22.0,
+                    width: 33,
+                    padding: 3.0,
+                    toggleSize: 15.0,
+                    borderRadius: defaultRadius,
+                    value: storageStatus,
+                    onToggle: (_) {}),
+              ],
+            ),
+            locationStatus == true &&
+                    contactsStatus == true &&
+                    storageStatus == true
+                ? bottomBarButton(context)
+                : SizedBox(
+                    height: InfiniteElevatedButton(
+                      onPressed: () {},
+                    ).height,
+                    child: const InfiniteText(
+                        "You can change these permissions at any time in your Settings app."),
+                  ),
           ],
         ),
       ),
+      /*  bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(defaultPadding).copyWith(
+            bottom: MediaQuery.of(context).padding.bottom + defaultPadding),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InfiniteElevatedButton(
+                    responsive: true,
+                    text: "All",
+                    onPressed: () async {
+                      initState();
+                      debugPrint(status.toString());
+                    }),
+                InfiniteElevatedButton(
+                    responsive: true,
+                    text: locationStatus ? "Loca.on" : "Loca.off",
+                    onPressed: () {}),
+                InfiniteElevatedButton(
+                    responsive: true,
+                    text: contactsStatus ? "Cont.on" : "Cont.off",
+                    onPressed: () {}),
+                InfiniteElevatedButton(
+                    responsive: true,
+                    text: storageStatus ? "strg.on" : "strg.off",
+                    onPressed: () {}),
+              ],
+            )
+          ],
+        ),
+      ), */
     );
   }
 

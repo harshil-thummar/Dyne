@@ -165,6 +165,7 @@ class SplashIcon extends StatelessWidget {
         //   ),
         // ),
         iconSize: size,
+        
         onPressed: onPressed != null && onPressed != "" ? onPressed : () {},
       ),
     );

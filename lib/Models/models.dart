@@ -69,9 +69,9 @@ List<OfferListData> offerListData = <OfferListData>[
 
 class FriendListData {
   final String image;
-  final String? name;
+  final String name;
   bool isOnline;
-  FriendListData({required this.image, this.isOnline = false, this.name});
+  FriendListData({required this.image, this.isOnline = false, this.name = ""});
 }
 
 List<FriendListData> friendListData = <FriendListData>[
