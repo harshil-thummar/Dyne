@@ -74,10 +74,10 @@ class _CreateAccountState extends State<CreateAccount> {
                 backgroundWidget: true,
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).padding.top +
-                        AppBar().preferredSize.height * 1.5)),
+                        AppBar().preferredSize.height * 2)),
             if (Responsive.isMobile(context) || Responsive.isTablet(context))
               PageView(
-                physics: const NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 controller: pageController,
                 onPageChanged: (pageNumbe) {
                   setState(() {
@@ -294,17 +294,15 @@ class _CreateAccountState extends State<CreateAccount> {
               right: MediaQuery.of(context).size.width / 4)
           : EdgeInsets.only(
               top: MediaQuery.of(context).padding.top +
-                  AppBar().preferredSize.height * 3,
+                  AppBar().preferredSize.height * 3.3,
               left: defaultPadding * 1.5,
               right: defaultPadding * 1.5),
       child: ListView(
-        padding:
-            // Responsive.isTablet(context)?
-            EdgeInsets.only(
-                top: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).size.height)
-        // :EdgeInsets.only(top: )
-        ,
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).size.height +
+                AppBar().preferredSize.height),
         children: [
           InfiniteText("Tell us a bit\nabout yourself",
               style: Theme.of(context)
@@ -328,7 +326,7 @@ class _CreateAccountState extends State<CreateAccount> {
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).padding.top +
-              AppBar().preferredSize.height),
+              AppBar().preferredSize.height * 1.5),
       child: Column(
         children: [
           profileAvtar(context, profileImage),

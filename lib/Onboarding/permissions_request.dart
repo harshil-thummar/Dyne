@@ -67,8 +67,10 @@ class _PermissionsRequestState extends State<PermissionsRequest> {
                       });
                     },
                     children: [
-                      parmissionPageOne(pageViewPadding, context),
-                      parmissionPageTow(pageViewPadding, context),
+                      SingleChildScrollView(
+                          child: parmissionPageOne(pageViewPadding, context)),
+                      SingleChildScrollView(
+                          child: parmissionPageTow(pageViewPadding, context)),
                     ],
                   ),
                 // Main Body (Desktop Only)
