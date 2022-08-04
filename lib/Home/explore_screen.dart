@@ -638,7 +638,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
         MediaQuery.of(context).orientation == Orientation.portrait;
     return FloatingSearchBar(
       hint: 'Search...',
-
       backgroundColor: Theme.of(context).backgroundColor.withOpacity(0.6),
       // scrollPadding: EdgeInsets.all(defaultPadding),
       margins: EdgeInsets.all(defaultPadding),
